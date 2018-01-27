@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Grippable
   - Guy
+  - Signal1
+  - Signal2
+  - Signal3
+  - Signal
+  - Phone
   layers:
   - Default
   - TransparentFX
