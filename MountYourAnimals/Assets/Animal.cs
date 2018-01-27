@@ -62,6 +62,11 @@ public class Animal : MonoBehaviour
             myJoint.enabled = true;
             myJoint.anchor = latestAnchor;
         }
+
+        if (!myJoint.enabled)
+        {
+            PlayMovementSound();
+        }
     }
     protected virtual void OnCollisionStay2D(Collision2D collision)
     {
