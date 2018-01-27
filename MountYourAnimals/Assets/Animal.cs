@@ -10,6 +10,8 @@ public class Animal : MonoBehaviour
 
     [SerializeField]
     private float rotateForce = 10;
+    [SerializeField]
+    private float maximumAngularVelocity = 180;
 
     private AudioSource myAudioSource;
     [SerializeField]
@@ -27,34 +29,41 @@ public class Animal : MonoBehaviour
         FindObjectOfType<Camera2D>().AddFocus(this.GetComponent<GameEye2D.Focus.Focus2D>());
     }
 
-    public void Spawn()
+    public virtual void Spawn()
     {
         PlaySpawnSound();
     }
 	
-	void Update ()
+	protected virtual void Update ()
     {
         // rotate based on key input
         myRb.AddTorque(-Input.GetAxis("Horizontal") * rotateForce);
+
+        // cap angular velocity (spin speed)
+        myRb.angularVelocity = Mathf.Clamp(myRb.angularVelocity, -maximumAngularVelocity, maximumAngularVelocity);
     }
 
     private GameObject latestHit;
     private Vector3 latestAnchor;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         // when we run into a new grippable object, we anchor our joint in it
         if (collision.collider.GetComponentInParent<Animal>() != null || collision.collider.tag == "Grippable")
         {
             latestHit = collision.collider.gameObject;
 
+            PlayMovementSound();
+
             Debug.Log("New collision with " + latestHit.name);
             Debug.DrawLine(collision.contacts[0].point, collision.contacts[0].normal * 0.5f, Color.red, 1);
 
-            myJoint.anchor = transform.InverseTransformPoint(collision.contacts[0].point);
+            latestAnchor = transform.InverseTransformPoint(collision.contacts[0].point);
+            myJoint.enabled = true;
+            myJoint.anchor = latestAnchor;
         }
     }
-    private void OnCollisionStay2D(Collision2D collision)
+    protected virtual void OnCollisionStay2D(Collision2D collision)
     {
         // keep anchoring to the latest object we ran into, even as we move around it
         if (collision.collider.gameObject == latestHit)
@@ -63,14 +72,17 @@ public class Animal : MonoBehaviour
 
             Debug.DrawLine(collision.contacts[0].point, collision.contacts[0].normal * 0.3f, Color.green);
 
+            Vector3 newAnchor = transform.InverseTransformPoint(collision.contacts[0].point);
+
             // play movement sound as we move
-            if (Vector3.Distance(collision.contacts[0].point, latestAnchor) > 0.1f)
+            if (Vector3.Distance(newAnchor, latestAnchor) > 0.3f)
             {
+                Debug.DrawLine(newAnchor, latestAnchor, Color.magenta);
                 PlayMovementSound();
             }
 
             // update anchor
-            latestAnchor = transform.InverseTransformPoint(collision.contacts[0].point);
+            latestAnchor = newAnchor;
             myJoint.anchor = latestAnchor;
 
         }
@@ -82,10 +94,12 @@ public class Animal : MonoBehaviour
 
     private void PlaySpawnSound()
     {
-        // TODO
+        AudioClip clip = spawnSounds[Random.Range(0, spawnSounds.Length)];
+        myAudioSource.PlayOneShot(clip);
     }
     private void PlayMovementSound()
     {
-        // TODO
+        AudioClip clip = moveSounds[Random.Range(0, moveSounds.Length)];
+        myAudioSource.PlayOneShot(clip);
     }
 }
