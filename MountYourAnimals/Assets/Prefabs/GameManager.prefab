@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4464432987518554}
   - component: {fileID: 114884527353539374}
+  - component: {fileID: 114223610665035466}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -225,7 +226,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1085306021133032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.0484449, y: -0.10497444, z: 0.041883707}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224800008895358318}
@@ -335,6 +336,23 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114223610665035466
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1085306021133032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48776b580bb185c4f8cae681248e5ec3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalAnimals:
+  - {fileID: 114330928419145754, guid: 0e9713a962424c645b9def59f7aef1f2, type: 2}
+  exoticAnimals: []
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114232174218884432
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -606,9 +624,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 908c2edb1369da1458eedd968b5fb894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoStart: 1
   startUI: {fileID: 1634857391971906}
   debugControlsUI: {fileID: 1314939239164152}
   gameUI: {fileID: 1100536626182076}
+  humanPrefab: {fileID: 1406344371607996, guid: 73ba090b9cf93834da0a3c034b1ce270,
+    type: 2}
+  humanSpawnPoint: {fileID: 0}
 --- !u!114 &114945156773016302
 MonoBehaviour:
   m_ObjectHideFlags: 1

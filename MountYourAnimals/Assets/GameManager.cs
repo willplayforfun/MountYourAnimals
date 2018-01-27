@@ -4,29 +4,42 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    // --- STARTUP STUFF ---
     [SerializeField]
     private bool autoStart;
+    [SerializeField]
+    private bool debugControlsStartShowing;
 
-    public GameManager Instance { get; private set; }
+    // singleton/global access
+    public static GameManager Instance { get; private set; }
+    internal AnimalSpawner AnimalSpawner { get; private set; }
+
     private void Awake()
     {
         Instance = this;
 
+        // TODO intro sequence?
+
         startUI.SetActive(true);
         gameUI.SetActive(false);
 #if UNITY_EDITOR
-        debugControlsUI.SetActive(true);
+        debugControlsUI.SetActive(debugControlsStartShowing);
 #else
         debugControlsUI.SetActive(false);
 #endif
 
-        animalSpawner = GetComponent<AnimalSpawner>();
+        AnimalSpawner = GetComponent<AnimalSpawner>();
+        AnimalSpawner.onSpawnAnimal += () => { roundNumber += 1; };
 
-        if(autoStart)
+        // create a human initially
+        SpawnHuman();
+
+        if (autoStart)
         {
             StartPlay();
         }
     }
+    // ----------------
 
     [SerializeField]
     private GameObject startUI;
@@ -35,32 +48,58 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject gameUI;
 
+    // --- HUMAN STUFF ---
+    [Space(12)]
+    [SerializeField]
+    private GameObject humanPrefab;
+    private GameObject humanInstance;
+    [SerializeField]
+    private Transform humanSpawnPoint;
 
-    private AnimalSpawner animalSpawner;
+    private void SpawnHuman()
+    {
+        if (humanInstance != null)
+        {
+            Destroy(humanInstance);
+        }
+        humanInstance = Instantiate(humanPrefab, humanSpawnPoint.position, humanSpawnPoint.rotation);
+    }
+    // ----------------
 
-
+    // --- GAME FLAGS ---
+    
+        // are we playing, or has the game ended / not started?
     internal bool isPlaying { get; private set; }
+
+    // how many animals have we placed? starts at 0, 
+    // goes up by 1 after each animal is created
     internal int roundNumber { get; private set; }
+    
+    // ----------------
+
 
     public void StartPlay()
     {
         // TODO start the game
         // load in initial animal, start dialogue, etc.
-        animalSpawner.SpawnAnimal();
+        AnimalSpawner.SpawnAnimal();
 
         isPlaying = true;
         startUI.SetActive(false);
         gameUI.SetActive(true);
+        // TODO fade out UI instead of immediately hiding, animate in game UI
     }
     public void GameOver()
     {
         // TODO reset the game
         // i.e. delete animals, reset flags, respawn/move human back, reset score, music, etc.
         roundNumber = 0;
+        SpawnHuman();
 
         isPlaying = false;
         startUI.SetActive(true);
         gameUI.SetActive(false);
+        // TODO some sort of transition and game over screen
     }
     public void Quit()
     {
@@ -69,6 +108,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        // debug controls
         if(Input.GetKeyDown(KeyCode.F1))
         {
             debugControlsUI.SetActive(!debugControlsUI.activeSelf);
