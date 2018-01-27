@@ -7,6 +7,7 @@ public class Animal : MonoBehaviour
 {
     private Rigidbody2D myRb;
     private HingeJoint2D myJoint;
+    private FixedJoint2D myHumanJoint;
 
     [SerializeField]
     private float rotateForce = 10;
@@ -25,6 +26,7 @@ public class Animal : MonoBehaviour
     {
         myRb = GetComponent<Rigidbody2D>();
         myJoint = GetComponent<HingeJoint2D>();
+        myHumanJoint = GetComponent<FixedJoint2D>();
         myAudioSource = GetComponent<AudioSource>();
     }
 
@@ -43,6 +45,7 @@ public class Animal : MonoBehaviour
 
         // freeze the animal
         myRb.bodyType = RigidbodyType2D.Static;
+        // TODO use fixed joint/spring joint instead for wobbly tower
 
         // camera should stop following us
         FindObjectOfType<Camera2D>().RemoveFocus(this.GetComponent<GameEye2D.Focus.Focus2D>());
@@ -73,7 +76,8 @@ public class Animal : MonoBehaviour
                 {
                     humanHasBeenGrabbed = true;
 
-                    // TODO stick to human, unstick human from previous grab
+                    // stick to human, unstick human from previous grab
+                    StickToHuman();
                 }
             }
             // check for freezing animal
@@ -85,6 +89,7 @@ public class Animal : MonoBehaviour
     }
 
     private GameObject humanHit;
+    private Vector3 humanAnchor;
 
     private GameObject latestHit;
     private Vector3 latestAnchor;
@@ -107,12 +112,7 @@ public class Animal : MonoBehaviour
         }
 
         // if we run into the human, store it so we can attach when the player presses the attach button
-        if(collision.collider.tag == "Guy")
-        {
-            humanHit = collision.collider.gameObject;
-
-
-        }
+        CheckHumanCollision(collision);
 
         if (!myJoint.enabled)
         {
@@ -142,9 +142,27 @@ public class Animal : MonoBehaviour
             myJoint.anchor = latestAnchor;
 
         }
+        else if (!humanHasBeenGrabbed && collision.collider.tag == "Guy")
+        {
+            humanHit = collision.collider.gameObject;
+            humanAnchor = transform.InverseTransformPoint(collision.contacts[0].point);
+        }
         else
         {
             Debug.DrawLine(collision.contacts[0].point, collision.contacts[0].normal * 0.4f, Color.black);
+        }
+    }
+    protected virtual void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.gameObject == latestHit)
+        {
+            Debug.LogWarning("Animal stopped colliding with latest hit, that shouldn't happen");
+            latestHit = null;
+            myJoint.enabled = false;
+        }
+        if (collision.collider.gameObject == humanHit && !humanHasBeenGrabbed)
+        {
+            humanHit = null;
         }
     }
 
@@ -171,5 +189,40 @@ public class Animal : MonoBehaviour
             AudioClip clip = freezeSounds[Random.Range(0, freezeSounds.Length)];
             myAudioSource.PlayOneShot(clip);
         }
+    }
+
+    private void CheckHumanCollision(Collision2D collision)
+    {
+        if (!humanHasBeenGrabbed && collision.collider.tag == "Guy")
+        {
+            if (collision.contacts.Length > 0)
+            {
+                humanHit = collision.collider.gameObject;
+                humanAnchor = transform.InverseTransformPoint(collision.contacts[0].point);
+
+                Debug.Log("New collision with " + humanHit.name);
+            }
+            else
+            {
+                Debug.LogWarning("Collided with human, but no contact points existed?");
+            }
+        }
+    }
+    private void StickToHuman()
+    {
+        Debug.Log("sticking to human");
+
+        // unstick human from previous animal
+        humanHit.GetComponentInParent<Human>().UnstickFromCurrentAnimal();
+
+        // stick to human
+        myHumanJoint.enabled = true;
+        myHumanJoint.anchor = humanAnchor;
+        myHumanJoint.connectedBody = humanHit.GetComponentInParent<Rigidbody2D>();
+        humanHit.GetComponentInParent<Human>().SetGrabbingAnimal(this);
+    }
+    public void UnstickFromHuman()
+    {
+        myHumanJoint.enabled = false;
     }
 }

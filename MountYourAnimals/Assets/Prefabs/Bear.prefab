@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 233288575100180346}
   - component: {fileID: 114321713113161062}
   - component: {fileID: 82371075632913014}
+  - component: {fileID: 255263764397733898}
   m_Layer: 0
   m_Name: Bear
   m_TagString: Untagged
@@ -265,10 +266,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateForce: 200
+  maximumAngularVelocity: 180
   spawnSounds:
   - {fileID: 8300000, guid: 9bca6ed57731f3542ab8a1852642e83c, type: 3}
   moveSounds:
   - {fileID: 8300000, guid: 7c46415634d843b49863130d17319cad, type: 3}
+  freezeSounds: []
 --- !u!114 &114480895786635156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -369,3 +372,20 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!255 &255263764397733898
+FixedJoint2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1603511003763020}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_DampingRatio: 0
+  m_Frequency: 0
