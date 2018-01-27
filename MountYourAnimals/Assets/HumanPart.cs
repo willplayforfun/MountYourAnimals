@@ -27,4 +27,13 @@ public class HumanPart : MonoBehaviour
             myAudioSource.PlayOneShot(clip);
         }
     }
+
+    public void EnableCameraFocus()
+    {
+        FindObjectOfType<Camera2D>().AddFocus(this.GetComponent<GameEye2D.Focus.Focus2D>());
+    }
+    public void DisableCameraFocus()
+    {
+        FindObjectOfType<Camera2D>().RemoveFocus(this.GetComponent<GameEye2D.Focus.Focus2D>());
+    }
 }

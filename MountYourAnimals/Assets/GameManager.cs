@@ -22,6 +22,10 @@ public class GameManager : MonoBehaviour
 
         startUI.SetActive(true);
         gameUI.SetActive(false);
+        freezePrompt.SetActive(false);
+        grabPrompt.SetActive(false);
+        movePrompt.SetActive(false);
+        roundPrompt.SetActive(false);
 #if UNITY_EDITOR
         debugControlsUI.SetActive(debugControlsStartShowing);
 #else
@@ -29,7 +33,6 @@ public class GameManager : MonoBehaviour
 #endif
 
         AnimalSpawner = GetComponent<AnimalSpawner>();
-        AnimalSpawner.onSpawnAnimal += () => { roundNumber += 1; };
 
         // create a human initially
         SpawnHuman();
@@ -49,6 +52,17 @@ public class GameManager : MonoBehaviour
     private GameObject debugControlsUI;
     [SerializeField]
     private GameObject gameUI;
+
+    [SerializeField]
+    internal GameObject freezePrompt;
+    [SerializeField]
+    internal GameObject grabPrompt;
+    [SerializeField]
+    internal GameObject movePrompt;
+    [SerializeField]
+    internal GameObject roundPrompt;
+    [SerializeField]
+    internal NextUpPanel nextAnimalPanel;
 
     // --- HUMAN STUFF ---
     [Space(12)]
@@ -70,16 +84,19 @@ public class GameManager : MonoBehaviour
 
     // --- GAME FLAGS ---
     
-        // are we playing, or has the game ended / not started?
+    // are we playing, or has the game ended / not started?
     internal bool isPlaying { get; private set; }
 
     // how many animals have we placed? starts at 0, 
     // goes up by 1 after each animal is created
     internal int roundNumber { get; private set; }
     
+    // true if we are waiting for player input to start the next round
+    internal bool waitingToStartRound { get; private set; }
+
     // ----------------
 
-
+    // called by UI to start the game
     public void StartPlay()
     {
         // TODO start the game
@@ -91,18 +108,54 @@ public class GameManager : MonoBehaviour
         gameUI.SetActive(true);
         // TODO fade out UI instead of immediately hiding, animate in game UI
     }
+
+    // called by the actively controlled Animal when the player freezes it
+    public void CurrentAnimalFrozen()
+    {
+        waitingToStartRound = true;
+
+        // show the stack
+        AnimalSpawner.ShowStack();
+        roundPrompt.SetActive(true);
+        nextAnimalPanel.PopOut();
+        humanInstance.GetComponent<Human>().EnableCameraFocus();
+    }
+
+    // called in GameManager's Update() function when the player presses space
+    public void StartNextRound()
+    {
+        waitingToStartRound = false;
+
+        AnimalSpawner.HideStack();
+        roundPrompt.SetActive(false);
+        nextAnimalPanel.Retract();
+        humanInstance.GetComponent<Human>().DisableCameraFocus();
+
+        // start next round
+        AnimalSpawner.SpawnAnimal();
+        roundNumber += 1;
+    }
+
+    // called when patience reaches zero, ending the game
     public void GameOver()
     {
         // TODO reset the game
-        // i.e. delete animals, reset flags, respawn/move human back, reset score, music, etc.
+        // i.e. reset flags, reset score, music, etc.
+
         roundNumber = 0;
+        // delete human and create a new one
         SpawnHuman();
+        // delete animals
+        AnimalSpawner.ClearAllAnimals();
+
 
         isPlaying = false;
         startUI.SetActive(true);
         gameUI.SetActive(false);
         // TODO some sort of transition and game over screen
     }
+
+    // called by UI to quit the application
     public void Quit()
     {
         Application.Quit();
@@ -118,6 +171,12 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F8))
         {
             GameOver();
+        }
+
+        // next round control
+        if (waitingToStartRound && Input.GetKeyDown(KeyCode.Space))
+        {
+            StartNextRound();
         }
     }
 }

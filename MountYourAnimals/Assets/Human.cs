@@ -24,4 +24,19 @@ public class Human : MonoBehaviour
     {
         currentGrabber = newAnimal;
     }
+
+    public void EnableCameraFocus()
+    {
+        foreach(HumanPart p in parts)
+        {
+            p.EnableCameraFocus();
+        }
+    }
+    public void DisableCameraFocus()
+    {
+        foreach (HumanPart p in parts)
+        {
+            p.DisableCameraFocus();
+        }
+    }
 }

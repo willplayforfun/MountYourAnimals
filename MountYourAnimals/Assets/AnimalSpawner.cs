@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class AnimalSpawner : MonoBehaviour
 {
-    public event System.Action onSpawnAnimal;
-
     [SerializeField]
     private Animal[] normalAnimals;
     [SerializeField]
@@ -15,9 +13,9 @@ public class AnimalSpawner : MonoBehaviour
 
     [Space(12)]
 
-    [SerializeField]
-    private NextUpPanel nextAnimalPanel;
     private Animal nextAnimal;
+
+    private List<Animal> allAnimals = new List<Animal>();
 
     private void SelectNextAnimal()
     {
@@ -46,19 +44,36 @@ public class AnimalSpawner : MonoBehaviour
         // TODO flip the animal if it is coming in the wrong way
         newAnimal.Spawn();
 
+        allAnimals.Add(newAnimal);
+
         SelectNextAnimal();
 
-        nextAnimalPanel.SetNextImage(nextAnimal.uiSprite);
-
-        onSpawnAnimal.Invoke();
+        GameManager.Instance.nextAnimalPanel.SetNextImage(nextAnimal.uiSprite, true);
     }
 
-    // called by the actively controlled Animal when the player freezes it
-    public void CurrentAnimalFrozen()
+    public void ShowStack()
     {
-        // TODO show the stack and let the player activate abilities on any of the animals
+        foreach(Animal a in allAnimals)
+        {
+            a.EnableCameraFocus();
+        }
 
-        // for now, just spawn the next animal
-        SpawnAnimal();
+        // TODO let the player activate abilities on any of the animals
+    }
+    public void HideStack()
+    {
+        foreach (Animal a in allAnimals)
+        {
+            a.DisableCameraFocus();
+        }
+    }
+
+    public void ClearAllAnimals()
+    {
+        foreach(Animal a in allAnimals)
+        {
+            Destroy(a.gameObject);
+        }
+        allAnimals.Clear();
     }
 }
