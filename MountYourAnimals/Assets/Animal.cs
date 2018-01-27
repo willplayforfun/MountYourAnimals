@@ -18,30 +18,73 @@ public class Animal : MonoBehaviour
     private AudioClip[] spawnSounds;
     [SerializeField]
     private AudioClip[] moveSounds;
+    [SerializeField]
+    private AudioClip[] freezeSounds;
 
-    void Start ()
+    void Awake ()
     {
         myRb = GetComponent<Rigidbody2D>();
         myJoint = GetComponent<HingeJoint2D>();
         myAudioSource = GetComponent<AudioSource>();
-
-        // make the camera follow us
-        FindObjectOfType<Camera2D>().AddFocus(this.GetComponent<GameEye2D.Focus.Focus2D>());
     }
 
     public virtual void Spawn()
     {
+        beingControlled = true;
+
+        // make the camera follow us
+        FindObjectOfType<Camera2D>().AddFocus(this.GetComponent<GameEye2D.Focus.Focus2D>());
+
         PlaySpawnSound();
     }
-	
+    protected virtual void Freeze()
+    {
+        beingControlled = false;
+
+        // freeze the animal
+        myRb.bodyType = RigidbodyType2D.Static;
+
+        // camera should stop following us
+        FindObjectOfType<Camera2D>().RemoveFocus(this.GetComponent<GameEye2D.Focus.Focus2D>());
+
+        PlayFreezeSound();
+
+        // let the game know the player has frozen the animal
+        GameManager.Instance.AnimalSpawner.CurrentAnimalFrozen();
+    }
+
+    private bool beingControlled;
+    private bool humanHasBeenGrabbed;
+
 	protected virtual void Update ()
     {
-        // rotate based on key input
-        myRb.AddTorque(-Input.GetAxis("Horizontal") * rotateForce);
+        if (beingControlled)
+        {
+            // rotate based on key input
+            myRb.AddTorque(-Input.GetAxis("Horizontal") * rotateForce);
 
-        // cap angular velocity (spin speed)
-        myRb.angularVelocity = Mathf.Clamp(myRb.angularVelocity, -maximumAngularVelocity, maximumAngularVelocity);
+            // cap angular velocity (spin speed)
+            myRb.angularVelocity = Mathf.Clamp(myRb.angularVelocity, -maximumAngularVelocity, maximumAngularVelocity);
+
+            // check for grabbing human
+            if(Input.GetKey(KeyCode.F) && !humanHasBeenGrabbed)
+            {
+                if (humanHit != null)
+                {
+                    humanHasBeenGrabbed = true;
+
+                    // TODO stick to human, unstick human from previous grab
+                }
+            }
+            // check for freezing animal
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                Freeze();
+            }
+        }
     }
+
+    private GameObject humanHit;
 
     private GameObject latestHit;
     private Vector3 latestAnchor;
@@ -61,6 +104,14 @@ public class Animal : MonoBehaviour
             latestAnchor = transform.InverseTransformPoint(collision.contacts[0].point);
             myJoint.enabled = true;
             myJoint.anchor = latestAnchor;
+        }
+
+        // if we run into the human, store it so we can attach when the player presses the attach button
+        if(collision.collider.tag == "Guy")
+        {
+            humanHit = collision.collider.gameObject;
+
+
         }
 
         if (!myJoint.enabled)
@@ -99,12 +150,26 @@ public class Animal : MonoBehaviour
 
     private void PlaySpawnSound()
     {
-        AudioClip clip = spawnSounds[Random.Range(0, spawnSounds.Length)];
-        myAudioSource.PlayOneShot(clip);
+        if (spawnSounds.Length > 0)
+        {
+            AudioClip clip = spawnSounds[Random.Range(0, spawnSounds.Length)];
+            myAudioSource.PlayOneShot(clip);
+        }
     }
     private void PlayMovementSound()
     {
-        AudioClip clip = moveSounds[Random.Range(0, moveSounds.Length)];
-        myAudioSource.PlayOneShot(clip);
+        if (moveSounds.Length > 0)
+        {
+            AudioClip clip = moveSounds[Random.Range(0, moveSounds.Length)];
+            myAudioSource.PlayOneShot(clip);
+        }
+    }
+    private void PlayFreezeSound()
+    {
+        if (freezeSounds.Length > 0)
+        {
+            AudioClip clip = freezeSounds[Random.Range(0, freezeSounds.Length)];
+            myAudioSource.PlayOneShot(clip);
+        }
     }
 }

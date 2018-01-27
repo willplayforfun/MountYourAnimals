@@ -56,10 +56,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4897993485754932}
   - component: {fileID: 50508959924983570}
+  - component: {fileID: 114181578633212860}
   - component: {fileID: 233868683524213188}
   m_Layer: 0
   m_Name: LeftLeg
-  m_TagString: Untagged
+  m_TagString: Guy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,10 +74,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4207169051695944}
   - component: {fileID: 50752925708295650}
+  - component: {fileID: 114331970977588444}
   - component: {fileID: 233617165501755920}
   m_Layer: 0
   m_Name: RightArm
-  m_TagString: Untagged
+  m_TagString: Guy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,10 +161,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4027978228361152}
   - component: {fileID: 50470569587463232}
+  - component: {fileID: 114906500073797456}
   - component: {fileID: 233198385288094142}
   m_Layer: 0
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Guy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -194,9 +197,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4356545410837826}
   - component: {fileID: 50355439894606446}
+  - component: {fileID: 114252811404767668}
   m_Layer: 0
   m_Name: Torso
-  m_TagString: Untagged
+  m_TagString: Guy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,10 +214,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4770773871876304}
   - component: {fileID: 50598608807037554}
+  - component: {fileID: 114314809228037860}
   - component: {fileID: 233633055643472592}
   m_Layer: 0
   m_Name: LeftArm
-  m_TagString: Untagged
+  m_TagString: Guy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -227,10 +232,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4170649519547560}
   - component: {fileID: 50943197245761440}
+  - component: {fileID: 114740679993146156}
   - component: {fileID: 233742483735597004}
   m_Layer: 0
   m_Name: RightLeg
-  m_TagString: Untagged
+  m_TagString: Guy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1197,6 +1203,30 @@ MonoBehaviour:
   lastFlipX: 0
   lastFlipY: 0
   editorCache: []
+--- !u!114 &114181578633212860
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1156176097985068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b20368346f356a4dacd584ab711fc96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSounds: []
+--- !u!114 &114252811404767668
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1812462999711858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b20368346f356a4dacd584ab711fc96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSounds: []
 --- !u!114 &114293833259827468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1230,6 +1260,30 @@ MonoBehaviour:
   lastFlipX: 0
   lastFlipY: 0
   editorCache: []
+--- !u!114 &114314809228037860
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1829506434894074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b20368346f356a4dacd584ab711fc96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSounds: []
+--- !u!114 &114331970977588444
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1211690526269838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b20368346f356a4dacd584ab711fc96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSounds: []
 --- !u!114 &114575972702926276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1307,6 +1361,30 @@ MonoBehaviour:
   lastFlipX: 0
   lastFlipY: 0
   editorCache: []
+--- !u!114 &114740679993146156
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1948332246019482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b20368346f356a4dacd584ab711fc96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSounds: []
+--- !u!114 &114906500073797456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1530354581672364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b20368346f356a4dacd584ab711fc96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSounds: []
 --- !u!114 &114987930180278676
 MonoBehaviour:
   m_ObjectHideFlags: 1
