@@ -33,7 +33,9 @@ public class GameManager : MonoBehaviour
 
         // create a human initially
         SpawnHuman();
-
+    }
+    private void Start()
+    {
         if (autoStart)
         {
             StartPlay();

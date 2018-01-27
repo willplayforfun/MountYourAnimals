@@ -13,25 +13,42 @@ public class AnimalSpawner : MonoBehaviour
     [SerializeField]
     private Transform[] spawnPoints;
 
-    // called by the GameManager initially to spawn the first Animal
-    public void SpawnAnimal()
+    [Space(12)]
+
+    [SerializeField]
+    private NextUpPanel nextAnimalPanel;
+    private Animal nextAnimal;
+
+    private void SelectNextAnimal()
     {
         bool normalAnimal = true;
 
-        Animal newAnimal = null;
-        if(normalAnimal)
+        if (normalAnimal)
         {
-            newAnimal = Instantiate(normalAnimals[Random.Range(0, normalAnimals.Length)]);
+            nextAnimal = normalAnimals[Random.Range(0, normalAnimals.Length)];
         }
         else
         {
-            newAnimal = Instantiate(exoticAnimals[Random.Range(0, exoticAnimals.Length)]);
+            nextAnimal = exoticAnimals[Random.Range(0, exoticAnimals.Length)];
         }
+    }
 
+    private void Awake()
+    {
+        SelectNextAnimal();
+    }
+
+    // called by the GameManager initially to spawn the first Animal
+    public void SpawnAnimal()
+    {
+        Animal newAnimal = Instantiate(nextAnimal);
         newAnimal.transform.position = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
         // TODO flip the animal if it is coming in the wrong way
-
         newAnimal.Spawn();
+
+        SelectNextAnimal();
+
+        nextAnimalPanel.SetNextImage(nextAnimal.uiSprite);
 
         onSpawnAnimal.Invoke();
     }

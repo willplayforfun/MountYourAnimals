@@ -14,13 +14,19 @@ public class Animal : MonoBehaviour
     [SerializeField]
     private float maximumAngularVelocity = 180;
 
-    private AudioSource myAudioSource;
+    [Space(12)]
+
     [SerializeField]
     private AudioClip[] spawnSounds;
     [SerializeField]
     private AudioClip[] moveSounds;
     [SerializeField]
     private AudioClip[] freezeSounds;
+    private AudioSource myAudioSource;
+
+    [Space(12)]
+
+    public Sprite uiSprite;
 
     void Awake ()
     {
@@ -104,7 +110,8 @@ public class Animal : MonoBehaviour
             PlayMovementSound();
 
             Debug.Log("New collision with " + latestHit.name);
-            Debug.DrawLine(collision.contacts[0].point, collision.contacts[0].normal * 0.5f, Color.red, 1);
+            if(collision.contacts.Length > 0)
+                Debug.DrawLine(collision.contacts[0].point, collision.contacts[0].point + collision.contacts[0].normal * 0.5f, Color.red, 1);
 
             latestAnchor = transform.InverseTransformPoint(collision.contacts[0].point);
             myJoint.enabled = true;
@@ -126,7 +133,7 @@ public class Animal : MonoBehaviour
         {
             // TODO handle new/multiple contact points
 
-            Debug.DrawLine(collision.contacts[0].point, collision.contacts[0].normal * 0.3f, Color.green);
+            Debug.DrawLine(collision.contacts[0].point, collision.contacts[0].point + collision.contacts[0].normal * 0.3f, Color.green);
 
             Vector3 newAnchor = transform.InverseTransformPoint(collision.contacts[0].point);
 
@@ -149,7 +156,7 @@ public class Animal : MonoBehaviour
         }
         else
         {
-            Debug.DrawLine(collision.contacts[0].point, collision.contacts[0].normal * 0.4f, Color.black);
+            Debug.DrawLine(collision.contacts[0].point, collision.contacts[0].point + collision.contacts[0].normal * 0.4f, Color.black);
         }
     }
     protected virtual void OnCollisionExit2D(Collision2D collision)
