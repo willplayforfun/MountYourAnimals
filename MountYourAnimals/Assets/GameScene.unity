@@ -731,21 +731,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 223370722586656334, guid: 3ce3356efdf2eb146800d1126c75a10b,
+    - target: {fileID: 114823678097981880, guid: 3ce3356efdf2eb146800d1126c75a10b,
+        type: 2}
+      propertyPath: mainBackground
+      value: 
+      objectReference: {fileID: 2138349648}
+    - target: {fileID: 223880891292601462, guid: 3ce3356efdf2eb146800d1126c75a10b,
         type: 2}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1026375995}
-    - target: {fileID: 114223610665035466, guid: 3ce3356efdf2eb146800d1126c75a10b,
+    - target: {fileID: 223446105894332718, guid: 3ce3356efdf2eb146800d1126c75a10b,
         type: 2}
-      propertyPath: spawnPoints.Array.data[0]
+      propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 646928897}
-    - target: {fileID: 114223610665035466, guid: 3ce3356efdf2eb146800d1126c75a10b,
+      objectReference: {fileID: 1026375995}
+    - target: {fileID: 223054301781452482, guid: 3ce3356efdf2eb146800d1126c75a10b,
         type: 2}
-      propertyPath: spawnPoints.Array.data[1]
+      propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 803414142}
+      objectReference: {fileID: 1026375995}
     - target: {fileID: 114884527353539374, guid: 3ce3356efdf2eb146800d1126c75a10b,
         type: 2}
       propertyPath: signal
@@ -756,26 +761,21 @@ Prefab:
       propertyPath: humanSpawnPoint
       value: 
       objectReference: {fileID: 1837522690}
-    - target: {fileID: 223054301781452482, guid: 3ce3356efdf2eb146800d1126c75a10b,
+    - target: {fileID: 114223610665035466, guid: 3ce3356efdf2eb146800d1126c75a10b,
+        type: 2}
+      propertyPath: spawnPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 646928897}
+    - target: {fileID: 114223610665035466, guid: 3ce3356efdf2eb146800d1126c75a10b,
+        type: 2}
+      propertyPath: spawnPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 803414142}
+    - target: {fileID: 223370722586656334, guid: 3ce3356efdf2eb146800d1126c75a10b,
         type: 2}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1026375995}
-    - target: {fileID: 223446105894332718, guid: 3ce3356efdf2eb146800d1126c75a10b,
-        type: 2}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1026375995}
-    - target: {fileID: 223880891292601462, guid: 3ce3356efdf2eb146800d1126c75a10b,
-        type: 2}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1026375995}
-    - target: {fileID: 114823678097981880, guid: 3ce3356efdf2eb146800d1126c75a10b,
-        type: 2}
-      propertyPath: mainBackground
-      value: 
-      objectReference: {fileID: 2138349648}
     - target: {fileID: 224400915104032678, guid: 3ce3356efdf2eb146800d1126c75a10b,
         type: 2}
       propertyPath: m_AnchorMax.x
@@ -1000,11 +1000,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4416005787714616, guid: f854910da4396964b9deb98b97727882, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4416005787714616, guid: f854910da4396964b9deb98b97727882, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.3
+      value: 1.27
       objectReference: {fileID: 0}
     - target: {fileID: 4416005787714616, guid: f854910da4396964b9deb98b97727882, type: 2}
       propertyPath: m_LocalPosition.z

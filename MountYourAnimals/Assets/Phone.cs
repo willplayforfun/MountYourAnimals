@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class Phone : MonoBehaviour
 {
-
-	GameObject signal;
 	int signalBar;
 	public Sprite[] signalSprites;
 	public GameObject signalIndicatorPivot;
@@ -15,17 +13,22 @@ public class Phone : MonoBehaviour
 	private void Start () {
 		
 		signalRenderer = signalIndicatorPivot.GetComponentInChildren<SpriteRenderer>();
-		signal = GameObject.Find("Signal1");
-
 	}
 	
 	private void Update () {
 
         if (signalIndicatorPivot != null)
         {
-            signalIndicatorPivot.transform.position = transform.position + new Vector3(0, 1, 0);
-			signalIndicatorPivot.transform.LookAt(signal.transform, Vector3.forward);
-		}
+            signalIndicatorPivot.transform.position = transform.position;
+            if (signalBar >= 3)
+            {
+                signalIndicatorPivot.transform.LookAt(signalIndicatorPivot.transform.position + Vector3.up, Vector3.forward);
+            }
+            else
+            {
+                signalIndicatorPivot.transform.LookAt(GameManager.Instance.signal.transform, Vector3.forward);
+            }
+        }
 
 		if(signalBar == 3)
 		{
@@ -33,7 +36,7 @@ public class Phone : MonoBehaviour
 		}
 		if(signalBar == 4)
 		{
-			GameManager.Instance.score += 1.5f*Time.deltaTime;
+			GameManager.Instance.score += 1*Time.deltaTime;
 		}
 	}	
 

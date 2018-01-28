@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
     // ----------------
 
     [SerializeField]
-    private GameObject signal;
+    internal GameObject signal;
 
     [Space(12)]
 
@@ -219,7 +219,7 @@ public class GameManager : MonoBehaviour
                     numLess++;
                 }
             }
-            yourScore.text = "Carl didn't get the job,";
+            yourScore.text = Mathf.RoundToInt(score) + " seconds";
             if (scores.Count == 0)
             {
                 relativeScore.text = "and he was the only candidate.";

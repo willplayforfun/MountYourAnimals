@@ -29,7 +29,7 @@ public class Giraffe : Animal
         if(!extended)
         {
             extended = true;
-            LeanTween.scaleY(neckContainer.gameObject, maxScale, 1).setEaseInOutQuad();
+            LeanTween.scaleY(neckContainer.gameObject, maxScale, extendSpeed).setEaseInOutQuad();
         }
     }
 
