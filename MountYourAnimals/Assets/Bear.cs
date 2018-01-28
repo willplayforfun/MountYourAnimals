@@ -9,7 +9,7 @@ public class Bear : Animal
         base.DoAbility();
 
         MouthTrigger trigger = GetComponentInChildren<MouthTrigger>();
-        if (trigger.latestAnimal != null)
+        if (trigger != null && trigger.latestAnimal != null)
         {
             if(trigger.latestAnimal == this.latestHit.GetComponentInParent<Animal>())
             {
@@ -26,5 +26,6 @@ public class Bear : Animal
         base.Freeze();
 
         GetComponentInChildren<MouthTrigger>().enabled = false;
+        Destroy(GetComponentInChildren<MouthTrigger>());
     }
 }
