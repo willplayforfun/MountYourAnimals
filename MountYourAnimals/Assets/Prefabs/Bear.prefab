@@ -367,7 +367,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3de326962d7b7d84e84454ca98b2604a, type: 3}
   - {fileID: 8300000, guid: d2c906d565773b14f8537f77fded52d7, type: 3}
   - {fileID: 8300000, guid: 7c46415634d843b49863130d17319cad, type: 3}
-  freezeSounds: []
+  freezeSounds:
+  - {fileID: 8300000, guid: cd1a01cb0ef10ad418c075b7c7773fbc, type: 3}
   uiSprite: {fileID: 21300000, guid: 56c83ee53bb22ee4384227224c549c9b, type: 3}
   gibs:
   - {fileID: 1562133340029346, guid: c2450bcbc157d754e87abdc5aec00f47, type: 2}
