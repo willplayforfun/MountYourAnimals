@@ -45,6 +45,12 @@ public class Phone : MonoBehaviour
         if (signalBar >= 3)
         {
             GameManager.Instance.patienceRef.inSignalRange = true;
+            GameManager.Instance.patienceRef.inStopRange = false;
+        }
+        if (signalBar == 2)
+        {
+
+            GameManager.Instance.patienceRef.inStopRange = true;
         }
     }
 	public void SubtractSignal()
@@ -55,6 +61,13 @@ public class Phone : MonoBehaviour
         if (signalBar < 3)
         {
             GameManager.Instance.patienceRef.inSignalRange = false;
+            GameManager.Instance.patienceRef.inStopRange = true;
+
         }
+        if(signalBar < 2)
+        {
+            GameManager.Instance.patienceRef.inStopRange = false;
+        }
+        
     }
 }
