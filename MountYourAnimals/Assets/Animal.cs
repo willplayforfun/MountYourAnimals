@@ -229,6 +229,9 @@ public class Animal : MonoBehaviour
             {
                 touchingGround = true;
                 GameManager.Instance.freezePrompt.SetActive(true);
+
+                myJoint.enabled = false;
+                latestHit = null;
             }
         }
     }
@@ -325,7 +328,7 @@ public class Animal : MonoBehaviour
 
                 GameManager.Instance.grabPrompt.SetActive(true);
 
-                Debug.Log("New collision with " + humanHit.name);
+                //Debug.Log("New collision with " + humanHit.name);
             }
             else
             {

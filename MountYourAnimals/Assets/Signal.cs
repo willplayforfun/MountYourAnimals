@@ -11,7 +11,7 @@ public class Signal : MonoBehaviour
 	/// <param name="other">The other Collider2D involved in this collision.</param>
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		print("TriggerEnter");
+		//print("TriggerEnter");
 		if(other.tag == "Phone")
 		{
             other.GetComponentInParent<Phone>().AddSignal();
@@ -20,7 +20,7 @@ public class Signal : MonoBehaviour
 
 	void OnTriggerExit2D(Collider2D other)
 	{
-		print("TriggerExit");
+		//print("TriggerExit");
 		if(other.tag == "Phone")
 		{
             other.GetComponentInParent<Phone>().SubtractSignal();

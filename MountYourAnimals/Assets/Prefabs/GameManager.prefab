@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4464432987518554}
   - component: {fileID: 114884527353539374}
   - component: {fileID: 114223610665035466}
+  - component: {fileID: 114823678097981880}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -107,6 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224834449199249926}
   - component: {fileID: 114545767362884788}
+  - component: {fileID: 114023007924418524}
   m_Layer: 5
   m_Name: PatienceBarUI
   m_TagString: Untagged
@@ -552,6 +554,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114023007924418524
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1175572606979876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72278d828e90faa48b82c8f488c2e607, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inSignalRange: 0
+  patienceBar: {fileID: 114545767362884788}
 --- !u!114 &114060692242311094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -592,6 +607,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animalImage: {fileID: 114983143629063050}
   popoutTime: 3
+  width: 400
+  popoutSpeed: 0.5
 --- !u!114 &114087572380662478
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1299,6 +1316,22 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Next Up
+--- !u!114 &114823678097981880
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1085306021133032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 567bbe934dd4f674a8a8fe22f5a83510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainBackground: {fileID: 0}
+  mainBackgroundHeight: 26.514002
+  starBackgroundPrefab: {fileID: 1861103488329880, guid: c947036cfaf793f4b8b7a311877c5896,
+    type: 2}
+  starBackgroundHeight: 20.79215
 --- !u!114 &114826519869577034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1359,7 +1392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 908c2edb1369da1458eedd968b5fb894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoStart: 1
+  autoStart: 0
   debugControlsStartShowing: 0
   startUI: {fileID: 1634857391971906}
   debugControlsUI: {fileID: 1314939239164152}
@@ -1370,6 +1403,7 @@ MonoBehaviour:
   roundPrompt: {fileID: 1538035322618934}
   abilityPrompt: {fileID: 1546224538722822}
   nextAnimalPanel: {fileID: 114083552676362326}
+  patienceRef: {fileID: 114023007924418524}
   humanPrefab: {fileID: 1406344371607996, guid: 73ba090b9cf93834da0a3c034b1ce270,
     type: 2}
   humanSpawnPoint: {fileID: 0}
@@ -1386,6 +1420,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animalImage: {fileID: 114060692242311094}
   popoutTime: 3
+  width: 0
+  popoutSpeed: 0.5
 --- !u!114 &114945156773016302
 MonoBehaviour:
   m_ObjectHideFlags: 1

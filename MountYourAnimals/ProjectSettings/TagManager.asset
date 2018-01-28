@@ -12,6 +12,7 @@ TagManager:
   - Signal
   - Phone
   - Ground
+  - Antlers
   layers:
   - Default
   - TransparentFX
