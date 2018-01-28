@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
         grabPrompt.SetActive(false);
         movePrompt.SetActive(false);
         roundPrompt.SetActive(false);
+        abilityPrompt.SetActive(false);
 #if UNITY_EDITOR
         debugControlsUI.SetActive(debugControlsStartShowing);
 #else
@@ -61,6 +62,8 @@ public class GameManager : MonoBehaviour
     internal GameObject movePrompt;
     [SerializeField]
     internal GameObject roundPrompt;
+    [SerializeField]
+    internal GameObject abilityPrompt;
     [SerializeField]
     internal NextUpPanel nextAnimalPanel;
 

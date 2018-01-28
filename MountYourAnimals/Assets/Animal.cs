@@ -22,7 +22,7 @@ public class Animal : MonoBehaviour
     private AudioClip[] moveSounds;
     [SerializeField]
     private AudioClip[] freezeSounds;
-    private AudioSource myAudioSource;
+    protected AudioSource myAudioSource;
 
     [Space(12)]
 
@@ -47,6 +47,9 @@ public class Animal : MonoBehaviour
 
         movePromptCoroutine = StartCoroutine(MovePromptRoutine());
         GameManager.Instance.freezePrompt.SetActive(true);
+        GameManager.Instance.abilityPrompt.SetActive(true);
+
+        //TODO set ability prompt to show specific animal ability
     }
     Coroutine movePromptCoroutine;
     private IEnumerator MovePromptRoutine()
@@ -75,6 +78,7 @@ public class Animal : MonoBehaviour
         GameManager.Instance.movePrompt.SetActive(false);
         GameManager.Instance.freezePrompt.SetActive(false);
         GameManager.Instance.grabPrompt.SetActive(false);
+        GameManager.Instance.abilityPrompt.SetActive(false);
 
         // let the game know the player has frozen the animal
         GameManager.Instance.CurrentAnimalFrozen();
@@ -102,6 +106,12 @@ public class Animal : MonoBehaviour
             // cap angular velocity (spin speed)
             myRb.angularVelocity = Mathf.Clamp(myRb.angularVelocity, -maximumAngularVelocity, maximumAngularVelocity);
 
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                GameManager.Instance.abilityPrompt.SetActive(false);
+
+                DoAbility();
+            }
             // check for grabbing human
             if(Input.GetKey(KeyCode.F) && !humanHasBeenGrabbed)
             {
@@ -281,5 +291,10 @@ public class Animal : MonoBehaviour
     public void DisableCameraFocus()
     {
         FindObjectOfType<Camera2D>().RemoveFocus(this.GetComponent<GameEye2D.Focus.Focus2D>());
+    }
+
+    protected virtual void DoAbility()
+    {
+
     }
 }
