@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Phone : MonoBehaviour {
 
@@ -10,10 +11,13 @@ public class Phone : MonoBehaviour {
 	public GameObject signalIndicator;
 	SpriteRenderer signalRenderer;
 
+    PatienceBar patienceRef;
+
 	// Use this for initialization
 	void Start () {
 		
 		signalRenderer = signalIndicator.GetComponent<SpriteRenderer>();
+        patienceRef = GameObject.Find("Patience").GetComponent<PatienceBar>();
 	}
 	
 	// Update is called once per frame
@@ -30,11 +34,19 @@ public class Phone : MonoBehaviour {
 		signalBar++;
 		signalRenderer.sprite = signalSprites[signalBar];
 		print(signalBar);
-	}
+        if (signalBar == 3)
+        {
+            patienceRef.inSignalRange = true;
+        }
+    }
 	public void SubtractSignal()
 	{
 		signalBar--;
 		signalRenderer.sprite = signalSprites[signalBar];
 		print(signalBar);
-	}
+        if (signalBar != 3)
+        {
+            patienceRef.inSignalRange = false;
+        }
+    }
 }

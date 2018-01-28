@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class Bird : Animal
 {
-
+    protected override void DoAbility()
+    {
+        base.DoAbility();
+    }
 }
