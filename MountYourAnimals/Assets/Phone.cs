@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Audio;
 
 public class Phone : MonoBehaviour
-
 {
 	int signalBar;
 	public Sprite[] signalSprites;
@@ -32,13 +30,6 @@ public class Phone : MonoBehaviour
     }
 
     private void Update () {
-
-//		float spacePercent = (gameObject.transform.position.y - backgroundAudioMinY)
-//			/ (backgroundAudioMaxY - backgroundAudioMinY);
-//
-//		bMixerWeights [0] = 1 - spacePercent;
-//		bMixerWeights [1] = spacePercent;
-//		bMixer.TransitionToSnapshots(bMixerSnapshots, bMixerWeights, 0f);
 
         if (signalIndicatorPivot != null)
         {
@@ -70,7 +61,7 @@ public class Phone : MonoBehaviour
 		signalBar++;
         if (signalBar > 3) signalBar = 3;
 		signalRenderer.sprite = signalSprites[signalBar];
-		print(signalBar);
+		// print(signalBar);
         if (signalBar >= 3)
         {
             GameManager.Instance.patienceRef.inSignalRange = true;
@@ -93,7 +84,7 @@ public class Phone : MonoBehaviour
 		signalBar--;
         if (signalBar < 0) signalBar = 0;
 		signalRenderer.sprite = signalSprites[signalBar];
-		print(signalBar);
+		// print(signalBar);
         if (signalBar < 3)
         {
             GameManager.Instance.patienceRef.inSignalRange = false;
