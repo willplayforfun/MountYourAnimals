@@ -123,7 +123,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1311695787847448
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -166,6 +166,21 @@ GameObject:
   - component: {fileID: 114786378302637860}
   m_Layer: 0
   m_Name: TheGuy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1444382891746292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4794387459956390}
+  m_Layer: 0
+  m_Name: SignalIndicatorPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -433,19 +448,33 @@ Transform:
   m_Father: {fileID: 4898788351267582}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 103.38801}
+--- !u!4 &4794387459956390
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1444382891746292}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.81, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4812786507314960}
+  m_Father: {fileID: 4898788351267582}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4812786507314960
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1311695787847448}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.6539967, y: -1.3814116, z: 2.371961}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 0.037287008, y: 0.037286997, z: 0.036038596}
   m_Children: []
-  m_Father: {fileID: 4898788351267582}
+  m_Father: {fileID: 4794387459956390}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 90, z: 90}
 --- !u!4 &4897993485754932
 Transform:
   m_ObjectHideFlags: 1
@@ -470,7 +499,7 @@ Transform:
   m_LocalPosition: {x: 2.392, y: 0.026, z: -2.371961}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4812786507314960}
+  - {fileID: 4794387459956390}
   - {fileID: 4784533700038322}
   - {fileID: 4170649519547560}
   - {fileID: 4897993485754932}
@@ -1817,7 +1846,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: cdd809e43c6eb0248ba8281ebe122c99, type: 3}
   - {fileID: 21300000, guid: 7eaf6a5bc878e77458d7e788b534f6ce, type: 3}
   - {fileID: 21300000, guid: 6881a43c43e6ccd42bece502846926f6, type: 3}
-  signalIndicator: {fileID: 1311695787847448}
+  signalIndicatorPivot: {fileID: 1444382891746292}
 --- !u!114 &114626753037545506
 MonoBehaviour:
   m_ObjectHideFlags: 1
