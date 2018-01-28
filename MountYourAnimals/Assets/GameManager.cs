@@ -234,6 +234,7 @@ public class GameManager : MonoBehaviour
             // TODO reset the game
             // i.e. reset flags, reset score, music, etc.
 
+            lastSignalChange = 0;
             // reset patience level
             patienceRef.ResetPatience();
             score = 0;
@@ -291,6 +292,8 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
+    private float lastSignalChange;
+
     private void Update()
     {
         // debug controls
@@ -308,7 +311,8 @@ public class GameManager : MonoBehaviour
         }
 
         // next round control
-        if (Input.GetKeyDown(KeyCode.Return)) {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
             if (waitingToStartRound)
             {
                 StartNextRound();
@@ -331,9 +335,9 @@ public class GameManager : MonoBehaviour
         //     StartNextRound();
         // }
 
-        if(score >= 3)
+        if(score - lastSignalChange >= 3)
         {
-            score = 0;
+            lastSignalChange = score;
             ChangeSignalLocation();
         }
     }
