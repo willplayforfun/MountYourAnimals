@@ -275,6 +275,11 @@ Transform:
   m_Father: {fileID: 774880083}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &239561030 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1388154356330750, guid: c4b571b509a39d8439f3785458eacfb7,
+    type: 2}
+  m_PrefabInternal: {fileID: 631572082}
 --- !u!1001 &631572082
 Prefab:
   m_ObjectHideFlags: 0
@@ -694,11 +699,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114223610665035466, guid: 3ce3356efdf2eb146800d1126c75a10b,
-        type: 2}
-      propertyPath: normalAnimals.Array.size
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4464432987518554, guid: 3ce3356efdf2eb146800d1126c75a10b, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -731,11 +731,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114823678097981880, guid: 3ce3356efdf2eb146800d1126c75a10b,
+    - target: {fileID: 223370722586656334, guid: 3ce3356efdf2eb146800d1126c75a10b,
         type: 2}
-      propertyPath: mainBackground
+      propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 2138349648}
+      objectReference: {fileID: 1026375995}
     - target: {fileID: 114223610665035466, guid: 3ce3356efdf2eb146800d1126c75a10b,
         type: 2}
       propertyPath: spawnPoints.Array.data[0]
@@ -748,6 +748,11 @@ Prefab:
       objectReference: {fileID: 803414142}
     - target: {fileID: 114884527353539374, guid: 3ce3356efdf2eb146800d1126c75a10b,
         type: 2}
+      propertyPath: signal
+      value: 
+      objectReference: {fileID: 239561030}
+    - target: {fileID: 114884527353539374, guid: 3ce3356efdf2eb146800d1126c75a10b,
+        type: 2}
       propertyPath: humanSpawnPoint
       value: 
       objectReference: {fileID: 1837522690}
@@ -756,7 +761,7 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1026375995}
-    - target: {fileID: 223370722586656334, guid: 3ce3356efdf2eb146800d1126c75a10b,
+    - target: {fileID: 223446105894332718, guid: 3ce3356efdf2eb146800d1126c75a10b,
         type: 2}
       propertyPath: m_Camera
       value: 
@@ -766,6 +771,11 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1026375995}
+    - target: {fileID: 114823678097981880, guid: 3ce3356efdf2eb146800d1126c75a10b,
+        type: 2}
+      propertyPath: mainBackground
+      value: 
+      objectReference: {fileID: 2138349648}
     - target: {fileID: 224400915104032678, guid: 3ce3356efdf2eb146800d1126c75a10b,
         type: 2}
       propertyPath: m_AnchorMax.x
@@ -776,18 +786,6 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114223610665035466, guid: 3ce3356efdf2eb146800d1126c75a10b,
-        type: 2}
-      propertyPath: normalAnimals.Array.data[1]
-      value: 
-      objectReference: {fileID: 114896819924540342, guid: cf33a55e2c40da141a81589340a92a2c,
-        type: 2}
-    - target: {fileID: 114223610665035466, guid: 3ce3356efdf2eb146800d1126c75a10b,
-        type: 2}
-      propertyPath: normalAnimals.Array.data[4]
-      value: 
-      objectReference: {fileID: 114418061222664478, guid: 0f851e02a3019b74fb7a6e2eabab0fea,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ce3356efdf2eb146800d1126c75a10b, type: 2}
   m_IsPrefabParent: 0

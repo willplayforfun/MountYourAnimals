@@ -20,6 +20,8 @@ public class MouthTrigger : MonoBehaviour
         {
             latestAnimal = collision.GetComponentInParent<Animal>();
             biteIndicator.SetActive(true);
+
+            GameManager.Instance.abilityPrompt.SetActive(true);
         }
     }
 
@@ -29,6 +31,8 @@ public class MouthTrigger : MonoBehaviour
         {
             latestAnimal = null;
             biteIndicator.SetActive(false);
+
+            GameManager.Instance.abilityPrompt.SetActive(false);
         }
     }
 

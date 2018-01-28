@@ -17,22 +17,28 @@ public class PatienceBar : MonoBehaviour {
 
     private int signalRef;
 
-	// Use this for initialization
-	void Start () {
-        currentPatience = maxPatience;
+	private void Start ()
+    {
+        ResetPatience();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        
 
-        if (!inSignalRange)
+    public void ResetPatience()
+    {
+        currentPatience = maxPatience;
+    }
+
+    private void Update ()
+    {
+        if (GameManager.Instance.isPlaying)
         {
-            currentPatience -= Time.deltaTime * patienceLossMultiplier;
-        }
-        else if(currentPatience < maxPatience)
-        {
-            currentPatience += Time.deltaTime * patienceGainMultiplier;
+            if (!inSignalRange)
+            {
+                currentPatience -= Time.deltaTime * patienceLossMultiplier;
+            }
+            else if (currentPatience < maxPatience)
+            {
+                currentPatience += Time.deltaTime * patienceGainMultiplier;
+            }
         }
 
         patienceBar.value = currentPatience / 100;
