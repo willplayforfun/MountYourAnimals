@@ -299,7 +299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b18018d6983be0949908cd833f0c47e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phone: {fileID: 0}
 --- !u!1 &183297642
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,7 +545,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b18018d6983be0949908cd833f0c47e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phone: {fileID: 0}
 --- !u!1 &646928896
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,6 +1104,36 @@ Prefab:
       propertyPath: spawnPoints.Array.data[1]
       value: 
       objectReference: {fileID: 803414142}
+    - target: {fileID: 114884527353539374, guid: 3ce3356efdf2eb146800d1126c75a10b,
+        type: 2}
+      propertyPath: minHorizontal
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114884527353539374, guid: 3ce3356efdf2eb146800d1126c75a10b,
+        type: 2}
+      propertyPath: minVertical
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114884527353539374, guid: 3ce3356efdf2eb146800d1126c75a10b,
+        type: 2}
+      propertyPath: horizontalVarianceMinimum
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114884527353539374, guid: 3ce3356efdf2eb146800d1126c75a10b,
+        type: 2}
+      propertyPath: horizontalVarianceMaximum
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114884527353539374, guid: 3ce3356efdf2eb146800d1126c75a10b,
+        type: 2}
+      propertyPath: verticalVarianceMinimum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114884527353539374, guid: 3ce3356efdf2eb146800d1126c75a10b,
+        type: 2}
+      propertyPath: verticalVarianceMaximum
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ce3356efdf2eb146800d1126c75a10b, type: 2}
   m_IsPrefabParent: 0
@@ -1209,7 +1237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b18018d6983be0949908cd833f0c47e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phone: {fileID: 0}
 --- !u!50 &1595352435
 Rigidbody2D:
   serializedVersion: 4

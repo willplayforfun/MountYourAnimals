@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     internal AnimalSpawner AnimalSpawner { get; private set; }
 
+    GameObject signal;
     private void Awake()
     {
         Instance = this;
@@ -37,6 +38,8 @@ public class GameManager : MonoBehaviour
 
         // create a human initially
         SpawnHuman();
+
+        signal = GameObject.Find("Signal1");
     }
     private void Start()
     {
@@ -181,5 +184,26 @@ public class GameManager : MonoBehaviour
         {
             StartNextRound();
         }
+
+        if(score >= 3)
+        {
+            score = 0;
+            ChangeSignalLocation();
+        }
     }
+
+    public float minHorizontal, horizontalVarianceMinimum, horizontalVarianceMaximum, minVertical, verticalVarianceMinimum, verticalVarianceMaximum;
+    void ChangeSignalLocation()
+    {
+        float horizontalVariance = Random.Range(horizontalVarianceMinimum,horizontalVarianceMaximum);
+        float verticalVariance = Random.Range(verticalVarianceMinimum,verticalVarianceMaximum);        
+        signal.transform.position += new Vector3(minHorizontal + horizontalVariance, minVertical + verticalVariance, 0);
+        if(signal.transform.position.x > 5)
+            signal.transform.position = new Vector3(5f,signal.transform.position.y, 0);
+        if(signal.transform.position.x < -5)
+            signal.transform.position = new Vector3(-5f, signal.transform.position.y, 0);
+    }
+
+    [SerializeField]
+    internal float score;
 }
