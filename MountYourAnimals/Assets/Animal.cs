@@ -5,8 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Animal : MonoBehaviour
 {
-    private Rigidbody2D myRb;
-    private HingeJoint2D myJoint;
+    protected Rigidbody2D myRb;
+    protected HingeJoint2D myJoint;
     private FixedJoint2D myPermanentJoint;
     private FixedJoint2D myHumanJoint;
 
@@ -29,6 +29,19 @@ public class Animal : MonoBehaviour
 
     public Sprite uiSprite;
 
+    [Space(12)]
+
+    [SerializeField]
+    private GameObject[] gibs;
+    [SerializeField]
+    private int numberOfGibs;
+    [SerializeField]
+    private float explodeForce;
+    [SerializeField]
+    private float maximumGibSpin;
+
+    private List<Animal> attachedAnimals = new List<Animal>();
+
     void Awake ()
     {
         myRb = GetComponent<Rigidbody2D>();
@@ -49,6 +62,8 @@ public class Animal : MonoBehaviour
         isFirstAnimal = first;
         beingControlled = true;
 
+        // TODO animate in
+
         // make the camera follow us
         EnableCameraFocus();
 
@@ -64,16 +79,17 @@ public class Animal : MonoBehaviour
 
         //TODO set ability prompt to show specific animal ability
     }
-    Coroutine movePromptCoroutine;
+    protected Coroutine movePromptCoroutine;
     private IEnumerator MovePromptRoutine()
     {
         yield return new WaitForSeconds(3);
         GameManager.Instance.movePrompt.SetActive(true);
         movePromptCoroutine = null;
     }
+
     protected virtual void Freeze()
     {
-        if (latestHit != null || isFirstAnimal || touchingGround)
+        if (latestHit != null || touchingGround)
         {
             beingControlled = false;
 
@@ -82,7 +98,7 @@ public class Animal : MonoBehaviour
             {
                 myRb.bodyType = RigidbodyType2D.Static;
             }
-            // TODO use fixed joint/spring joint instead for wobbly tower
+            // use fixed joint/spring joint instead for wobbly tower
             else
             {
                 if(latestHit != null)
@@ -92,6 +108,11 @@ public class Animal : MonoBehaviour
                     myPermanentJoint.connectedBody = latestHit.GetComponentInParent<Rigidbody2D>();
                     myPermanentJoint.anchor = latestAnchor;
                     myPermanentJoint.connectedAnchor = latestHit.transform.InverseTransformPoint(this.transform.TransformPoint(latestAnchor));
+
+                    if (latestHit.GetComponentInParent<Animal>() != null)
+                    {
+                        latestHit.GetComponentInParent<Animal>().attachedAnimals.Add(this);
+                    }
                 }
             }
 
@@ -114,8 +135,8 @@ public class Animal : MonoBehaviour
         }
     }
 
-    private bool beingControlled;
-    private bool humanHasBeenGrabbed;
+    protected bool beingControlled;
+    protected bool humanHasBeenGrabbed;
 
 	protected virtual void Update ()
     {
@@ -168,7 +189,7 @@ public class Animal : MonoBehaviour
     private GameObject humanHit;
     private Vector3 humanAnchor;
 
-    private GameObject latestHit;
+    protected GameObject latestHit;
     private Vector3 latestAnchor;
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
@@ -236,13 +257,10 @@ public class Animal : MonoBehaviour
                 myJoint.anchor = latestAnchor;
 
             }
-            else if (!humanHasBeenGrabbed && collision.collider.tag == "Guy")
-            {
-                humanHit = collision.collider.gameObject;
-                humanAnchor = transform.InverseTransformPoint(collision.contacts[0].point);
-            }
             else
             {
+                CheckHumanCollision(collision);
+
                 Debug.DrawLine(collision.contacts[0].point, collision.contacts[0].point + collision.contacts[0].normal * 0.4f, Color.black);
             }
         }
@@ -254,9 +272,9 @@ public class Animal : MonoBehaviour
             if (collision.collider.gameObject == latestHit)
             {
                 Debug.LogWarning("Animal stopped colliding with latest hit, that shouldn't happen");
-                latestHit = null;
-                myJoint.enabled = false;
-                GameManager.Instance.freezePrompt.SetActive(false);
+                //latestHit = null;
+                //myJoint.enabled = false;
+                //GameManager.Instance.freezePrompt.SetActive(false);
             }
             if (collision.collider.gameObject == humanHit && !humanHasBeenGrabbed)
             {
@@ -279,7 +297,7 @@ public class Animal : MonoBehaviour
             myAudioSource.PlayOneShot(clip);
         }
     }
-    private void PlayMovementSound()
+    protected void PlayMovementSound()
     {
         if (moveSounds.Length > 0)
         {
@@ -287,7 +305,7 @@ public class Animal : MonoBehaviour
             myAudioSource.PlayOneShot(clip);
         }
     }
-    private void PlayFreezeSound()
+    protected void PlayFreezeSound()
     {
         if (freezeSounds.Length > 0)
         {
@@ -296,7 +314,7 @@ public class Animal : MonoBehaviour
         }
     }
 
-    private void CheckHumanCollision(Collision2D collision)
+    protected void CheckHumanCollision(Collision2D collision)
     {
         if (!humanHasBeenGrabbed && collision.collider.tag == "Guy")
         {
@@ -349,7 +367,7 @@ public class Animal : MonoBehaviour
 
     protected virtual void DoAbility()
     {
-
+        Debug.Log(this.gameObject.name + " did its ability");
     }
 
     private bool allowMouseActivation;
@@ -360,5 +378,32 @@ public class Animal : MonoBehaviour
         {
             DoAbility();
         }
+    }
+
+    public void Explode()
+    {
+        Debug.Log(this.gameObject.name + " exploded");
+
+        foreach(Animal a in attachedAnimals)
+        {
+            if(a != null)
+            {
+                DetachFromAnimal();
+            }
+        }
+
+        for(int i = 0; i < numberOfGibs; i++)
+        {
+            GameObject gib = Instantiate(gibs[Random.Range(0, gibs.Length)], transform.position, Quaternion.AngleAxis(Random.Range(0, 360), Vector3.forward));
+            gib.GetComponent<Rigidbody2D>().velocity = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.forward) * Vector3.left * explodeForce * Random.Range(0.8f, 1.2f);
+            gib.GetComponent<Rigidbody2D>().angularVelocity = Random.Range(-maximumGibSpin, maximumGibSpin);
+        }
+
+        Destroy(this.gameObject);
+    }
+
+    private void DetachFromAnimal()
+    {
+        myPermanentJoint.enabled = false;
     }
 }
