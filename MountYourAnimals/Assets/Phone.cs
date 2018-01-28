@@ -19,12 +19,19 @@ public class Phone : MonoBehaviour
 //	public float backgroundAudioMinY;
 //	public float backgroundAudioMaxY;
 
+    internal bool rotateBar = false;
+
 	private void Start () {
 		
 		signalRenderer = signalIndicatorPivot.GetComponentInChildren<SpriteRenderer>();
+        Camera.main.GetComponent<Camera2D>().AddFocus(GetComponent<GameEye2D.Focus.Focus2D>());
 	}
-	
-	private void Update () {
+    private void OnDestroy()
+    {
+        Camera.main.GetComponent<Camera2D>().RemoveFocus(GetComponent<GameEye2D.Focus.Focus2D>());
+    }
+
+    private void Update () {
 
 //		float spacePercent = (gameObject.transform.position.y - backgroundAudioMinY)
 //			/ (backgroundAudioMaxY - backgroundAudioMinY);
@@ -36,7 +43,7 @@ public class Phone : MonoBehaviour
         if (signalIndicatorPivot != null)
         {
             signalIndicatorPivot.transform.position = transform.position;
-            if (signalBar >= 3)
+            if (signalBar >= 3 || !rotateBar)
             {
                 signalIndicatorPivot.transform.LookAt(signalIndicatorPivot.transform.position + Vector3.up, Vector3.forward);
             }
@@ -54,17 +61,26 @@ public class Phone : MonoBehaviour
 		{
 			GameManager.Instance.score += 1*Time.deltaTime;
 		}
-	}	
+	}
 
-	public void AddSignal()
+    private float lastDialogue;
+
+	public void AddSignal(bool cinematic = false)
 	{
 		signalBar++;
+        if (signalBar > 3) signalBar = 3;
 		signalRenderer.sprite = signalSprites[signalBar];
 		print(signalBar);
         if (signalBar >= 3)
         {
             GameManager.Instance.patienceRef.inSignalRange = true;
             GameManager.Instance.patienceRef.inStopRange = false;
+
+            if(Time.time - lastDialogue > 5 && !cinematic)
+            {
+                lastDialogue = Time.time;
+                GetComponentInParent<Human>().SaySomething();
+            }
         }
         if (signalBar == 2)
         {
@@ -72,9 +88,10 @@ public class Phone : MonoBehaviour
             GameManager.Instance.patienceRef.inStopRange = true;
         }
     }
-	public void SubtractSignal()
+	public void SubtractSignal(bool cinematic = false)
 	{
 		signalBar--;
+        if (signalBar < 0) signalBar = 0;
 		signalRenderer.sprite = signalSprites[signalBar];
 		print(signalBar);
         if (signalBar < 3)

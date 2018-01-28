@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class PatienceBar : MonoBehaviour {
 
-    private float currentPatience;
-    private float maxPatience = 100;
-    private float patienceLossMultiplier = 0.75f;
-    private float patienceGainMultiplier = 5;
+    public float currentPatience { get; private set; }
+    public float maxPatience = 100;
+    private float patienceLossMultiplier = 1;
+    private float patienceGainMultiplier = 3;
 
     public bool inSignalRange = false;
     public bool inStopRange = false;
@@ -46,7 +46,7 @@ public class PatienceBar : MonoBehaviour {
             
         }
 
-        patienceBar.value = currentPatience / 100;
+        patienceBar.value = currentPatience / maxPatience;
 
         if(currentPatience <= 0)
         {

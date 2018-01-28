@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     List<float> scores = new List<float>();
 
+
     private void Awake()
     {
         Instance = this;
@@ -52,6 +53,8 @@ public class GameManager : MonoBehaviour
 
         AnimalSpawner = GetComponent<AnimalSpawner>();
 
+        signalStartPosition = signal.transform.position;
+
         // create a human initially
         SpawnHuman();
     }
@@ -66,6 +69,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     internal GameObject signal;
+    private Vector3 signalStartPosition;
 
     [Space(12)]
 
@@ -137,7 +141,7 @@ public class GameManager : MonoBehaviour
         if (!isPlaying)
         {
             // start the game with intro sequence
-            StartCoroutine(IntroSequence());
+            introRoutine = StartCoroutine(IntroSequence());
 
             waitingToStartRound = false;
             isPlaying = true;
@@ -148,14 +152,34 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private Coroutine introRoutine;
     private IEnumerator IntroSequence()
     {
         // TODO start dialogue
-
-        yield return null;
+        yield return new WaitForSeconds(1);
+        humanInstance.GetComponentInChildren<Phone>().AddSignal(true);
+        yield return new WaitForSeconds(0.5f);
+        humanInstance.GetComponentInChildren<Phone>().AddSignal(true);
+        yield return new WaitForSeconds(0.5f);
+        humanInstance.GetComponentInChildren<Phone>().AddSignal(true);
+        yield return new WaitForSeconds(0.5f);
+        humanInstance.GetComponent<Human>().ShowTextBubble("Intro dialogue!");
+        yield return new WaitForSeconds(5);
+        humanInstance.GetComponent<Human>().ShowTextBubble("Intro dialogue 2!");
+        yield return new WaitForSeconds(5);
+        humanInstance.GetComponentInChildren<Phone>().SubtractSignal(true);
+        yield return new WaitForSeconds(1f);
+        humanInstance.GetComponentInChildren<Phone>().SubtractSignal(true);
+        yield return new WaitForSeconds(1f);
+        humanInstance.GetComponentInChildren<Phone>().SubtractSignal(true);
+        yield return new WaitForSeconds(1f);
+        humanInstance.GetComponentInChildren<Phone>().rotateBar = true;
+        humanInstance.GetComponentInChildren<Human>().cinematic = false;
 
         // load in initial animal
         AnimalSpawner.SpawnAnimal();
+
+        introRoutine = null;
     }
 
     // called by the actively controlled Animal when the player freezes it
@@ -201,7 +225,7 @@ public class GameManager : MonoBehaviour
             SpawnHuman();
             // delete animals
             AnimalSpawner.ClearAllAnimals();
-
+            signal.transform.position = signalStartPosition;
 
             isPlaying = false;
             startUI.SetActive(false);
@@ -267,9 +291,22 @@ public class GameManager : MonoBehaviour
         }
 
         // next round control
-        if (waitingToStartRound && Input.GetKeyDown(KeyCode.Return))
-        {
-            StartNextRound();
+        if (Input.GetKeyDown(KeyCode.Return)) {
+            if (waitingToStartRound)
+            {
+                StartNextRound();
+            }
+            else if (introRoutine != null)
+            {
+                StopCoroutine(introRoutine);
+                humanInstance.GetComponentInChildren<Phone>().SubtractSignal(true);
+                humanInstance.GetComponentInChildren<Phone>().SubtractSignal(true);
+                humanInstance.GetComponentInChildren<Phone>().SubtractSignal(true);
+                humanInstance.GetComponentInChildren<Phone>().rotateBar = true;
+                humanInstance.GetComponentInChildren<Human>().cinematic = false;
+                AnimalSpawner.SpawnAnimal();
+                introRoutine = null;
+            }
         }
 
         if(score >= 3)
@@ -308,6 +345,6 @@ public class GameManager : MonoBehaviour
 
     private void ResetHighScores()
     {
-
+        PlayerPrefs.DeleteKey("Scores");
     }
 }
