@@ -168,6 +168,9 @@ public class GameManager : MonoBehaviour
         roundPrompt.SetActive(true);
         nextAnimalPanel.PopOut();
         humanInstance.GetComponent<Human>().EnableCameraFocus();
+
+        //Combined Freeze + Next round button press into one 
+        StartNextRound();
     }
 
     // called in GameManager's Update() function when the player presses space
@@ -267,10 +270,10 @@ public class GameManager : MonoBehaviour
         }
 
         // next round control
-        if (waitingToStartRound && Input.GetKeyDown(KeyCode.Return))
-        {
-            StartNextRound();
-        }
+        // if (waitingToStartRound && Input.GetKeyDown(KeyCode.Return))
+        // {
+        //     StartNextRound();
+        // }
 
         if(score >= 3)
         {

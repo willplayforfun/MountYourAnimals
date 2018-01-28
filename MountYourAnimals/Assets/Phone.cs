@@ -44,7 +44,7 @@ public class Phone : MonoBehaviour
 	{
 		signalBar++;
 		signalRenderer.sprite = signalSprites[signalBar];
-		print(signalBar);
+		// print(signalBar);
         if (signalBar >= 3)
         {
             GameManager.Instance.patienceRef.inSignalRange = true;
@@ -60,7 +60,7 @@ public class Phone : MonoBehaviour
 	{
 		signalBar--;
 		signalRenderer.sprite = signalSprites[signalBar];
-		print(signalBar);
+		// print(signalBar);
         if (signalBar < 3)
         {
             GameManager.Instance.patienceRef.inSignalRange = false;
