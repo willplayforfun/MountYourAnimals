@@ -229,6 +229,9 @@ public class Animal : MonoBehaviour
             {
                 touchingGround = true;
                 GameManager.Instance.freezePrompt.SetActive(true);
+
+                myJoint.enabled = false;
+                latestHit = null;
             }
         }
     }

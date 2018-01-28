@@ -40,6 +40,7 @@ public class PatienceBar : MonoBehaviour {
         if(currentPatience <= 0)
         {
             //you lose
+            GameManager.Instance.GameOver();
         }
 
         Debug.Log(patienceBar.value);

@@ -1327,6 +1327,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567bbe934dd4f674a8a8fe22f5a83510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainBackground: {fileID: 0}
+  mainBackgroundHeight: 26.514002
+  starBackgroundPrefab: {fileID: 1861103488329880, guid: c947036cfaf793f4b8b7a311877c5896,
+    type: 2}
+  starBackgroundHeight: 20.79215
 --- !u!114 &114826519869577034
 MonoBehaviour:
   m_ObjectHideFlags: 1
