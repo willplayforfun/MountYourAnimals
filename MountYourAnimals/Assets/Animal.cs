@@ -325,7 +325,7 @@ public class Animal : MonoBehaviour
 
                 GameManager.Instance.grabPrompt.SetActive(true);
 
-                Debug.Log("New collision with " + humanHit.name);
+                //Debug.Log("New collision with " + humanHit.name);
             }
             else
             {

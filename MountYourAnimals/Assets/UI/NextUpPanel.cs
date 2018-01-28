@@ -45,7 +45,6 @@ public class NextUpPanel : MonoBehaviour
         Debug.Log("Popping out panel");
         LeanTween.cancel(this.gameObject);
         LeanTween.moveLocal(this.gameObject, startingPos, popoutSpeed).setEaseOutQuad();
-        // TODO show
     }
     private Coroutine retractCoroutine;
     private IEnumerator RetractRoutine()
@@ -59,6 +58,5 @@ public class NextUpPanel : MonoBehaviour
         Debug.Log("Retracting panel");
         LeanTween.cancel(this.gameObject);
         LeanTween.moveLocal(this.gameObject, startingPos + width  * Vector3.right, popoutSpeed).setEaseOutQuad();
-        // TODO hide
     }
 }

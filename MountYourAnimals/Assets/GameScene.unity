@@ -897,15 +897,15 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1026375995}
-    - target: {fileID: 114884527353539374, guid: 3ce3356efdf2eb146800d1126c75a10b,
+    - target: {fileID: 224400915104032678, guid: 3ce3356efdf2eb146800d1126c75a10b,
         type: 2}
-      propertyPath: debugControlsStartShowing
-      value: 0
+      propertyPath: m_AnchorMax.x
+      value: 0.8
       objectReference: {fileID: 0}
-    - target: {fileID: 114884527353539374, guid: 3ce3356efdf2eb146800d1126c75a10b,
+    - target: {fileID: 224400915104032678, guid: 3ce3356efdf2eb146800d1126c75a10b,
         type: 2}
-      propertyPath: autoStart
-      value: 0
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ce3356efdf2eb146800d1126c75a10b, type: 2}

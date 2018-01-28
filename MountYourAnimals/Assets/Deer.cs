@@ -30,7 +30,7 @@ public class Deer : Animal
     {
         base.OnCollisionEnter2D(collision);
 
-        if(!antlersStuck && collision.collider.tag == "Antlers" && collision.otherCollider.tag == "Antlers")
+        if (!antlersStuck && collision.collider.tag == "Antlers" && collision.otherCollider.tag == "Antlers")
         {
             antlersStuck = true;
             antlerJoint = this.gameObject.AddComponent<FixedJoint2D>();
