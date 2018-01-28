@@ -375,15 +375,6 @@ MonoBehaviour:
   numberOfGibs: 10
   explodeForce: 10
   maximumGibSpin: 10
-  bMixer: {fileID: 24100000, guid: 7405c5fc95ff845e8b5a85d1bba3c5f9, type: 2}
-  bMixerSnapshots:
-  - {fileID: 24500006, guid: 7405c5fc95ff845e8b5a85d1bba3c5f9, type: 2}
-  - {fileID: 245519191744643048, guid: 7405c5fc95ff845e8b5a85d1bba3c5f9, type: 2}
-  bMixerWeights:
-  - 1
-  - 0
-  musicSnapshot: {fileID: 245853507228580542, guid: 81f6db5ec0db247a980030aeed6742a4,
-    type: 2}
 --- !u!114 &114480895786635156
 MonoBehaviour:
   m_ObjectHideFlags: 1

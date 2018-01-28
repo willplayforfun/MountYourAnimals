@@ -645,6 +645,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 --- !u!1 &279938957
@@ -867,6 +868,8 @@ AudioSource:
     m_PostInfinity: 2
     m_RotationOrder: 0
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of df82b7c... Added Background Audio
 --- !u!1 &321234360
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,6 +1159,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 --- !u!1 &741535411
@@ -1299,6 +1303,8 @@ AudioSource:
     m_PostInfinity: 2
     m_RotationOrder: 0
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of df82b7c... Added Background Audio
 --- !u!1 &754366566
 GameObject:
   m_ObjectHideFlags: 0
@@ -1728,6 +1734,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 --- !u!1 &1088978644
@@ -1841,6 +1848,9 @@ AudioSource:
     m_PostInfinity: 2
     m_RotationOrder: 0
 --- !u!1 &1133841407
+=======
+--- !u!1 &1314956067
+>>>>>>> parent of df82b7c... Added Background Audio
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -2100,6 +2110,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 --- !u!1 &1327582475
@@ -2322,6 +2333,8 @@ AudioSource:
     m_PostInfinity: 2
     m_RotationOrder: 0
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of df82b7c... Added Background Audio
 --- !u!1 &1377184465
 GameObject:
   m_ObjectHideFlags: 0
@@ -2654,6 +2667,7 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 224400915104032678, guid: 3ce3356efdf2eb146800d1126c75a10b,
         type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -2723,6 +2737,8 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+=======
+>>>>>>> parent of df82b7c... Added Background Audio
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ce3356efdf2eb146800d1126c75a10b, type: 2}
   m_IsPrefabParent: 0
