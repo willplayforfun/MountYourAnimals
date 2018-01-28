@@ -2,25 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Signal : MonoBehaviour {
-
-	//int signalBar;
-
-	public GameObject phone;
-	Phone phoneScript;
-
-	// Use this for initialization
-	void Awake () 
-	{
-		phoneScript = phone.GetComponent<Phone>();
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
+public class Signal : MonoBehaviour
+{
 	/// <summary>
 	/// Sent when another object enters a trigger collider attached to this
 	/// object (2D physics only).
@@ -31,7 +14,7 @@ public class Signal : MonoBehaviour {
 		print("TriggerEnter");
 		if(other.tag == "Phone")
 		{
-			phoneScript.AddSignal();
+            other.GetComponentInParent<Phone>().AddSignal();
 		}
 	}
 
@@ -40,7 +23,7 @@ public class Signal : MonoBehaviour {
 		print("TriggerExit");
 		if(other.tag == "Phone")
 		{
-			phoneScript.SubtractSignal();
+            other.GetComponentInParent<Phone>().SubtractSignal();
 		}
 	}
 }
