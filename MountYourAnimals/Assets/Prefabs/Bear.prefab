@@ -24,7 +24,8 @@ GameObject:
   - component: {fileID: 233288575100180346}
   - component: {fileID: 114321713113161062}
   - component: {fileID: 82371075632913014}
-  - component: {fileID: 255263764397733898}
+  - component: {fileID: 231794801180577560}
+  - component: {fileID: 255220369592695184}
   m_Layer: 0
   m_Name: Bear
   m_TagString: Untagged
@@ -359,6 +360,25 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!231 &231794801180577560
+SpringJoint2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1603511003763020}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 1
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 0
+  m_Distance: 0.005
+  m_DampingRatio: 0
+  m_Frequency: 1
 --- !u!233 &233288575100180346
 HingeJoint2D:
   m_ObjectHideFlags: 1
@@ -382,7 +402,7 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
---- !u!255 &255263764397733898
+--- !u!255 &255220369592695184
 FixedJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -390,12 +410,12 @@ FixedJoint2D:
   m_GameObject: {fileID: 1603511003763020}
   m_Enabled: 0
   serializedVersion: 4
-  m_EnableCollision: 0
+  m_EnableCollision: 1
   m_ConnectedRigidBody: {fileID: 0}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_DampingRatio: 0
-  m_Frequency: 0
+  m_Frequency: 0.001

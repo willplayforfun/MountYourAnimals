@@ -7,6 +7,7 @@ public class Animal : MonoBehaviour
 {
     private Rigidbody2D myRb;
     private HingeJoint2D myJoint;
+    private FixedJoint2D myPermanentJoint;
     private FixedJoint2D myHumanJoint;
 
     [SerializeField]
@@ -32,12 +33,20 @@ public class Animal : MonoBehaviour
     {
         myRb = GetComponent<Rigidbody2D>();
         myJoint = GetComponent<HingeJoint2D>();
-        myHumanJoint = GetComponent<FixedJoint2D>();
+        myJoint.enabled = false;
+        myHumanJoint = this.gameObject.AddComponent<FixedJoint2D>();
+        myHumanJoint.enabled = false;
+        myPermanentJoint = GetComponent<FixedJoint2D>();
+        //myPermanentJoint = this.gameObject.AddComponent<FixedJoint2D>();
+        myPermanentJoint.enabled = false;
         myAudioSource = GetComponent<AudioSource>();
     }
 
-    public virtual void Spawn()
+    private bool isFirstAnimal;
+
+    public virtual void Spawn(bool first)
     {
+        isFirstAnimal = first;
         beingControlled = true;
 
         // make the camera follow us
@@ -46,8 +55,12 @@ public class Animal : MonoBehaviour
         PlaySpawnSound();
 
         movePromptCoroutine = StartCoroutine(MovePromptRoutine());
-        GameManager.Instance.freezePrompt.SetActive(true);
         GameManager.Instance.abilityPrompt.SetActive(true);
+
+        if(isFirstAnimal)
+        {
+            GameManager.Instance.freezePrompt.SetActive(true);
+        }
 
         //TODO set ability prompt to show specific animal ability
     }
@@ -60,28 +73,45 @@ public class Animal : MonoBehaviour
     }
     protected virtual void Freeze()
     {
-        beingControlled = false;
-
-        // freeze the animal
-        myRb.bodyType = RigidbodyType2D.Static;
-        // TODO use fixed joint/spring joint instead for wobbly tower
-
-        // camera should stop following us
-        DisableCameraFocus();
-
-        PlayFreezeSound();
-
-        if(movePromptCoroutine != null)
+        if (latestHit != null || isFirstAnimal || touchingGround)
         {
-            StopCoroutine(movePromptCoroutine);
-        }
-        GameManager.Instance.movePrompt.SetActive(false);
-        GameManager.Instance.freezePrompt.SetActive(false);
-        GameManager.Instance.grabPrompt.SetActive(false);
-        GameManager.Instance.abilityPrompt.SetActive(false);
+            beingControlled = false;
 
-        // let the game know the player has frozen the animal
-        GameManager.Instance.CurrentAnimalFrozen();
+            // freeze the animal
+            if (isFirstAnimal || (touchingGround && latestHit == null))
+            {
+                myRb.bodyType = RigidbodyType2D.Static;
+            }
+            // TODO use fixed joint/spring joint instead for wobbly tower
+            else
+            {
+                if(latestHit != null)
+                {
+                    myJoint.enabled = false;
+                    myPermanentJoint.enabled = true;
+                    myPermanentJoint.connectedBody = latestHit.GetComponentInParent<Rigidbody2D>();
+                    myPermanentJoint.anchor = latestAnchor;
+                    myPermanentJoint.connectedAnchor = latestHit.transform.InverseTransformPoint(this.transform.TransformPoint(latestAnchor));
+                }
+            }
+
+            // camera should stop following us
+            DisableCameraFocus();
+
+            PlayFreezeSound();
+
+            if (movePromptCoroutine != null)
+            {
+                StopCoroutine(movePromptCoroutine);
+            }
+            GameManager.Instance.movePrompt.SetActive(false);
+            GameManager.Instance.freezePrompt.SetActive(false);
+            GameManager.Instance.grabPrompt.SetActive(false);
+            GameManager.Instance.abilityPrompt.SetActive(false);
+
+            // let the game know the player has frozen the animal
+            GameManager.Instance.CurrentAnimalFrozen();
+        }
     }
 
     private bool beingControlled;
@@ -133,6 +163,8 @@ public class Animal : MonoBehaviour
         }
     }
 
+    private bool touchingGround;
+
     private GameObject humanHit;
     private Vector3 humanAnchor;
 
@@ -146,17 +178,22 @@ public class Animal : MonoBehaviour
             // when we run into a new grippable object, we anchor our joint in it
             if (collision.collider.GetComponentInParent<Animal>() != null || collision.collider.tag == "Grippable")
             {
-                latestHit = collision.collider.gameObject;
-
-                PlayMovementSound();
-
-                Debug.Log("New collision with " + latestHit.name);
                 if (collision.contacts.Length > 0)
+                {
+                    latestHit = collision.collider.gameObject;
+
+                    PlayMovementSound();
+                    GameManager.Instance.freezePrompt.SetActive(true);
+
+                    Debug.Log("New collision with " + latestHit.name);
+
                     Debug.DrawLine(collision.contacts[0].point, collision.contacts[0].point + collision.contacts[0].normal * 0.5f, Color.red, 1);
 
-                latestAnchor = transform.InverseTransformPoint(collision.contacts[0].point);
-                myJoint.enabled = true;
-                myJoint.anchor = latestAnchor;
+                    latestAnchor = transform.InverseTransformPoint(collision.contacts[0].point);
+                    myJoint.enabled = true;
+                    myJoint.connectedBody = latestHit.GetComponent<Rigidbody2D>();
+                    myJoint.anchor = latestAnchor;
+                }
             }
 
             // if we run into the human, store it so we can attach when the player presses the attach button
@@ -165,6 +202,12 @@ public class Animal : MonoBehaviour
             if (!myJoint.enabled)
             {
                 PlayMovementSound();
+            }
+
+            if(collision.collider.gameObject.tag == "Ground")
+            {
+                touchingGround = true;
+                GameManager.Instance.freezePrompt.SetActive(true);
             }
         }
     }
@@ -213,11 +256,17 @@ public class Animal : MonoBehaviour
                 Debug.LogWarning("Animal stopped colliding with latest hit, that shouldn't happen");
                 latestHit = null;
                 myJoint.enabled = false;
+                GameManager.Instance.freezePrompt.SetActive(false);
             }
             if (collision.collider.gameObject == humanHit && !humanHasBeenGrabbed)
             {
                 humanHit = null;
                 GameManager.Instance.grabPrompt.SetActive(false);
+            }
+
+            if (collision.collider.gameObject.tag == "Ground")
+            {
+                touchingGround = false;
             }
         }
     }
@@ -293,8 +342,23 @@ public class Animal : MonoBehaviour
         FindObjectOfType<Camera2D>().RemoveFocus(this.GetComponent<GameEye2D.Focus.Focus2D>());
     }
 
+    public void SetMouseAbilityActivation(bool on)
+    {
+        allowMouseActivation = on;
+    }
+
     protected virtual void DoAbility()
     {
 
+    }
+
+    private bool allowMouseActivation;
+    private void OnMouseDown()
+    {
+        Debug.Log("clicked on " + this.gameObject.name);
+        if(allowMouseActivation)
+        {
+            DoAbility();
+        }
     }
 }

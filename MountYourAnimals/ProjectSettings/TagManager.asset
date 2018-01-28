@@ -11,6 +11,7 @@ TagManager:
   - Signal3
   - Signal
   - Phone
+  - Ground
   layers:
   - Default
   - TransparentFX

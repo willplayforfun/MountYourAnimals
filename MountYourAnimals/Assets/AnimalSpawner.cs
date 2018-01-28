@@ -36,13 +36,14 @@ public class AnimalSpawner : MonoBehaviour
         SelectNextAnimal();
     }
 
+
     // called by the GameManager initially to spawn the first Animal
     public void SpawnAnimal()
     {
         Animal newAnimal = Instantiate(nextAnimal);
         newAnimal.transform.position = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
         // TODO flip the animal if it is coming in the wrong way
-        newAnimal.Spawn();
+        newAnimal.Spawn(allAnimals.Count == 0);
 
         allAnimals.Add(newAnimal);
 
@@ -56,15 +57,17 @@ public class AnimalSpawner : MonoBehaviour
         foreach(Animal a in allAnimals)
         {
             a.EnableCameraFocus();
-        }
 
-        // TODO let the player activate abilities on any of the animals
+            // let the player activate abilities on any of the animals
+            a.SetMouseAbilityActivation(true);
+        }
     }
     public void HideStack()
     {
         foreach (Animal a in allAnimals)
         {
             a.DisableCameraFocus();
+            a.SetMouseAbilityActivation(false);
         }
     }
 

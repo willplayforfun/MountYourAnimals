@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class Bear : Animal
 {
-
+    protected override void DoAbility()
+    {
+        base.DoAbility();
+    }
 }
