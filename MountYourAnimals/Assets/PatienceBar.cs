@@ -43,7 +43,7 @@ public class PatienceBar : MonoBehaviour {
             GameManager.Instance.GameOver();
         }
 
-        Debug.Log(patienceBar.value);
+        //Debug.Log(patienceBar.value);
 
 	}
 }
