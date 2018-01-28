@@ -804,16 +804,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114223610665035466, guid: 3ce3356efdf2eb146800d1126c75a10b,
-        type: 2}
-      propertyPath: spawnPoints.Array.data[0]
-      value: 
-      objectReference: {fileID: 646928897}
-    - target: {fileID: 114223610665035466, guid: 3ce3356efdf2eb146800d1126c75a10b,
-        type: 2}
-      propertyPath: spawnPoints.Array.data[1]
-      value: 
-      objectReference: {fileID: 803414142}
     - target: {fileID: 223880891292601462, guid: 3ce3356efdf2eb146800d1126c75a10b,
         type: 2}
       propertyPath: m_Camera
@@ -834,6 +824,16 @@ Prefab:
       propertyPath: humanSpawnPoint
       value: 
       objectReference: {fileID: 1837522690}
+    - target: {fileID: 114223610665035466, guid: 3ce3356efdf2eb146800d1126c75a10b,
+        type: 2}
+      propertyPath: spawnPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 646928897}
+    - target: {fileID: 114223610665035466, guid: 3ce3356efdf2eb146800d1126c75a10b,
+        type: 2}
+      propertyPath: spawnPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 803414142}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ce3356efdf2eb146800d1126c75a10b, type: 2}
   m_IsPrefabParent: 0

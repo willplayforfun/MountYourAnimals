@@ -8,16 +8,36 @@ public class NextUpPanel : MonoBehaviour
     [SerializeField]
     private Image animalImage;
 
-    public void SetNextImage(Sprite newSprite)
+    [SerializeField]
+    private float popoutTime = 3;
+
+    public void SetNextImage(Sprite newSprite, bool hideAfterTime)
     {
         animalImage.sprite = newSprite;
+
+        PopOut();
+        if (hideAfterTime)
+        {
+            if(retractCoroutine != null)
+            {
+                StopCoroutine(retractCoroutine);
+            }
+            retractCoroutine = StartCoroutine(RetractRoutine());
+        }
     }
 
-    private void PopOut()
+    public void PopOut()
     {
         // TODO show
     }
-    private void Retract()
+    private Coroutine retractCoroutine;
+    private IEnumerator RetractRoutine()
+    {
+        yield return new WaitForSeconds(popoutTime);
+        Retract();
+        retractCoroutine = null;
+    }
+    public void Retract()
     {
         // TODO hide
     }
