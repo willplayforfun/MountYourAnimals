@@ -11,6 +11,20 @@ public class NextUpPanel : MonoBehaviour
     [SerializeField]
     private float popoutTime = 3;
 
+    [SerializeField]
+    private float width;
+
+    private Vector3 startingPos;
+
+    [SerializeField]
+    private float popoutSpeed = 0.5f;
+
+    private void Awake()
+    {
+        startingPos = this.transform.localPosition;
+        Retract();
+    }
+
     public void SetNextImage(Sprite newSprite, bool hideAfterTime)
     {
         animalImage.sprite = newSprite;
@@ -28,7 +42,9 @@ public class NextUpPanel : MonoBehaviour
 
     public void PopOut()
     {
-        // TODO show
+        Debug.Log("Popping out panel");
+        LeanTween.cancel(this.gameObject);
+        LeanTween.moveLocal(this.gameObject, startingPos, popoutSpeed).setEaseOutQuad();
     }
     private Coroutine retractCoroutine;
     private IEnumerator RetractRoutine()
@@ -39,6 +55,8 @@ public class NextUpPanel : MonoBehaviour
     }
     public void Retract()
     {
-        // TODO hide
+        Debug.Log("Retracting panel");
+        LeanTween.cancel(this.gameObject);
+        LeanTween.moveLocal(this.gameObject, startingPos + width  * Vector3.right, popoutSpeed).setEaseOutQuad();
     }
 }

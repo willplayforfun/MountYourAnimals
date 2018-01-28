@@ -69,6 +69,8 @@ public class GameManager : MonoBehaviour
     internal GameObject abilityPrompt;
     [SerializeField]
     internal NextUpPanel nextAnimalPanel;
+    [SerializeField]
+    internal PatienceBar patienceRef;
 
     // --- HUMAN STUFF ---
     [Space(12)]

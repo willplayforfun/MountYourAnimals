@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Phone : MonoBehaviour {
+public class Phone : MonoBehaviour
+{
 
 	GameObject signal;
 	int signalBar;
@@ -10,16 +12,14 @@ public class Phone : MonoBehaviour {
 	public GameObject signalIndicatorPivot;
 	SpriteRenderer signalRenderer;
 
-	// Use this for initialization
-	void Start () {
+	private void Start () {
 		
 		signalRenderer = signalIndicatorPivot.GetComponentInChildren<SpriteRenderer>();
 		signal = GameObject.Find("Signal1");
 
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	private void Update () {
 
         if (signalIndicatorPivot != null)
         {
@@ -42,11 +42,19 @@ public class Phone : MonoBehaviour {
 		signalBar++;
 		signalRenderer.sprite = signalSprites[signalBar];
 		print(signalBar);
-	}
+        if (signalBar >= 3)
+        {
+            GameManager.Instance.patienceRef.inSignalRange = true;
+        }
+    }
 	public void SubtractSignal()
 	{
 		signalBar--;
 		signalRenderer.sprite = signalSprites[signalBar];
 		print(signalBar);
-	}
+        if (signalBar < 3)
+        {
+            GameManager.Instance.patienceRef.inSignalRange = false;
+        }
+    }
 }
