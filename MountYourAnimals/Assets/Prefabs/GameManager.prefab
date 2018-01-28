@@ -527,6 +527,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animalImage: {fileID: 114983143629063050}
   popoutTime: 3
+  width: 400
+  popoutSpeed: 0.5
 --- !u!114 &114087572380662478
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1219,6 +1221,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animalImage: {fileID: 114060692242311094}
   popoutTime: 3
+  width: 0
+  popoutSpeed: 0.5
 --- !u!114 &114945156773016302
 MonoBehaviour:
   m_ObjectHideFlags: 1
