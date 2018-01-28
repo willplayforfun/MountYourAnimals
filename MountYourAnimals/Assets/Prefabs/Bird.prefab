@@ -72,7 +72,7 @@ Transform:
   m_GameObject: {fileID: 1351537449220456}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4037471851835084}
   m_RootOrder: 0
@@ -113,7 +113,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.46, y: 1.25}
+    oldSize: {x: 0.43843845, y: 0.3753754}
     newSize: {x: 1.85, y: 1.17}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -121,21 +121,21 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.42, y: -0.074999996}
-      - {x: 0.32, y: 0.13499999}
-      - {x: 0.24, y: 0.225}
-      - {x: 0.14, y: 0.53499997}
-      - {x: 0.049999997, y: 0.625}
-      - {x: -0.55, y: 0.625}
-      - {x: -0.65, y: 0.565}
-      - {x: -0.72999996, y: 0.405}
-      - {x: -0.72999996, y: 0.155}
-      - {x: -0.66999996, y: -0.21499999}
-      - {x: -0.45999998, y: -0.42499998}
-      - {x: -0.34, y: -0.625}
-      - {x: 0.7, y: -0.625}
-      - {x: 0.72999996, y: -0.555}
-      - {x: 0.72999996, y: -0.315}
+    - - {x: 0.12612613, y: -0.022522524}
+      - {x: 0.0960961, y: 0.040540542}
+      - {x: 0.072072074, y: 0.06756757}
+      - {x: 0.042042043, y: 0.16066067}
+      - {x: 0.015015015, y: 0.1876877}
+      - {x: -0.16516517, y: 0.1876877}
+      - {x: -0.1951952, y: 0.16966967}
+      - {x: -0.21921922, y: 0.12162162}
+      - {x: -0.21921922, y: 0.04654655}
+      - {x: -0.2012012, y: -0.06456456}
+      - {x: -0.13813815, y: -0.12762763}
+      - {x: -0.1021021, y: -0.1876877}
+      - {x: 0.21021022, y: -0.1876877}
+      - {x: 0.21921922, y: -0.16666667}
+      - {x: 0.21921922, y: -0.0945946}
 --- !u!82 &82767566671629106
 AudioSource:
   m_ObjectHideFlags: 1
@@ -245,7 +245,7 @@ MonoBehaviour:
     width: 146
     height: 125
   lastOffset: {x: 73, y: 62.5}
-  lastPixelsPerUnit: 100
+  lastPixelsPerUnit: 333
   lastFlipX: 0
   lastFlipY: 0
   editorCache: []
@@ -275,8 +275,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21cd9c5fbb48b8543af3a194dcce0c22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateForce: 200
-  maximumAngularVelocity: 180
+  rotateForce: 100
+  maximumAngularVelocity: 90
   spawnSounds:
   - {fileID: 8300000, guid: 9f920535471229648a7b787efad92b12, type: 3}
   moveSounds:
@@ -292,6 +292,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 11920bff2b41bb140bdca668818fd569, type: 3}
   freezeSounds: []
   uiSprite: {fileID: 21300000, guid: 368aeedafd11dd844b47c3584380e76a, type: 3}
+  gibs:
+  - {fileID: 1562133340029346, guid: c2450bcbc157d754e87abdc5aec00f47, type: 2}
+  numberOfGibs: 10
+  explodeForce: 10
+  maximumGibSpin: 10
+  upForce: 40
+  horizontalForce: 30
 --- !u!212 &212106435889221932
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -367,11 +374,11 @@ FixedJoint2D:
   m_GameObject: {fileID: 1881968090735464}
   m_Enabled: 0
   serializedVersion: 4
-  m_EnableCollision: 0
+  m_EnableCollision: 1
   m_ConnectedRigidBody: {fileID: 0}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_DampingRatio: 0

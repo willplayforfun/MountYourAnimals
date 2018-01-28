@@ -56,18 +56,24 @@ public class AnimalSpawner : MonoBehaviour
     {
         foreach(Animal a in allAnimals)
         {
-            a.EnableCameraFocus();
+            if (a != null)
+            {
+                a.EnableCameraFocus();
 
-            // let the player activate abilities on any of the animals
-            a.SetMouseAbilityActivation(true);
+                // let the player activate abilities on any of the animals
+                a.SetMouseAbilityActivation(true);
+            }
         }
     }
     public void HideStack()
     {
         foreach (Animal a in allAnimals)
         {
-            a.DisableCameraFocus();
-            a.SetMouseAbilityActivation(false);
+            if (a != null)
+            {
+                a.DisableCameraFocus();
+                a.SetMouseAbilityActivation(false);
+            }
         }
     }
 
@@ -75,7 +81,10 @@ public class AnimalSpawner : MonoBehaviour
     {
         foreach(Animal a in allAnimals)
         {
-            Destroy(a.gameObject);
+            if (a != null)
+            {
+                Destroy(a.gameObject);
+            }
         }
         allAnimals.Clear();
     }

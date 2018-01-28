@@ -72,7 +72,7 @@ Transform:
   m_GameObject: {fileID: 1133302035668638}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4430641876219444}
   m_RootOrder: 0
@@ -113,7 +113,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.29, y: 0.3}
+    oldSize: {x: 1.45, y: 1.5}
     newSize: {x: 1.85, y: 1.17}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -121,24 +121,52 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.11227474, y: 0.17070761}
-      - {x: -0.16381188, y: 0.14584136}
-      - {x: -0.13981333, y: 0.078209154}
-      - {x: -0.10490642, y: 0.019303689}
-      - {x: -0.06781774, y: -0.065782025}
-      - {x: -0.057336856, y: -0.14727533}
-      - {x: -0.004912186, y: -0.1487628}
-      - {x: -0.0018172741, y: -0.07851177}
-      - {x: 0.06898003, y: -0.07695957}
-      - {x: 0.06907549, y: -0.14345495}
-      - {x: 0.13409157, y: -0.15218167}
-      - {x: 0.1559085, y: 0.006008837}
-      - {x: 0.14499998, y: 0.030007353}
-      - {x: 0.1233799, y: 0.03771119}
-      - {x: -0.024900913, y: 0.053548373}
-      - {x: 0.019370366, y: 0.13261603}
-      - {x: -0.026685525, y: 0.17088552}
-      - {x: -0.075186014, y: 0.11509303}
+    - - {x: 0.6, y: -0.72499996}
+      - {x: 0.6, y: -0.575}
+      - {x: 0.55, y: -0.475}
+      - {x: 0.5, y: -0.425}
+      - {x: 0.45, y: -0.67499995}
+      - {x: 0.45, y: -0.475}
+      - {x: 0.35, y: -0.325}
+      - {x: 0.25, y: -0.22500001}
+      - {x: 0.05, y: -0.22500001}
+      - {x: -0.05, y: -0.22500001}
+      - {x: -0.1, y: -0.72499996}
+      - {x: -0.1, y: -0.475}
+      - {x: -0.15, y: -0.325}
+      - {x: -0.2, y: -0.275}
+      - {x: -0.25, y: -0.67499995}
+      - {x: -0.25, y: -0.425}
+      - {x: -0.4, y: 0.125}
+      - {x: -0.5, y: 0.22500001}
+      - {x: -0.55, y: 0.275}
+      - {x: -0.5, y: 0.375}
+      - {x: -0.6, y: 0.475}
+      - {x: -0.55, y: 0.525}
+      - {x: -0.7, y: 0.575}
+      - {x: -0.7, y: 0.67499995}
+      - {x: -0.65000004, y: 0.575}
+      - {x: -0.6, y: 0.72499996}
+      - {x: -0.55, y: 0.625}
+      - {x: -0.45, y: 0.525}
+      - {x: -0.4, y: 0.475}
+      - {x: -0.25, y: 0.525}
+      - {x: -0.1, y: 0.72499996}
+      - {x: -0.1, y: 0.625}
+      - {x: -0.05, y: 0.575}
+      - {x: -0, y: 0.67499995}
+      - {x: -0, y: 0.575}
+      - {x: -0.1, y: 0.575}
+      - {x: -0.1, y: 0.475}
+      - {x: -0.2, y: 0.475}
+      - {x: -0.3, y: 0.375}
+      - {x: -0.3, y: 0.22500001}
+      - {x: -0.15, y: 0.075}
+      - {x: 0.45, y: 0.075}
+      - {x: 0.6, y: -0.025000002}
+      - {x: 0.7, y: 0.025000002}
+      - {x: 0.6, y: -0.175}
+      - {x: 0.55, y: -0.275}
 --- !u!82 &82568348154468296
 AudioSource:
   m_ObjectHideFlags: 1
@@ -230,15 +258,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c55c83d4c4dd1145ad5fbbab3c3df36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AlphaTolerance: 20
-  DistanceThreshold: 8
+  AlphaTolerance: 18
+  DistanceThreshold: 0
   Scale: 1
   Decompose: 0
   RunInPlayMode: 0
   UseCache: 0
-  lastAlphaTolerance: 20
+  lastAlphaTolerance: 18
   lastScale: 1
-  lastDistanceThreshold: 8
+  lastDistanceThreshold: 0
   lastDecompose: 0
   lastSprite: {fileID: 21300000, guid: 781b307759b92d5449fdfd14dda5ba92, type: 3}
   lastRect:
@@ -248,7 +276,7 @@ MonoBehaviour:
     width: 29
     height: 30
   lastOffset: {x: 14.5, y: 15}
-  lastPixelsPerUnit: 100
+  lastPixelsPerUnit: 20
   lastFlipX: 1
   lastFlipY: 0
   editorCache: []
@@ -280,6 +308,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 134724c28a507554c9cdf20aabb8333c, type: 3}
   freezeSounds: []
   uiSprite: {fileID: 21300000, guid: 781b307759b92d5449fdfd14dda5ba92, type: 3}
+  gibs:
+  - {fileID: 1562133340029346, guid: c2450bcbc157d754e87abdc5aec00f47, type: 2}
+  numberOfGibs: 10
+  explodeForce: 10
+  maximumGibSpin: 10
 --- !u!114 &114961788859259048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -370,11 +403,11 @@ FixedJoint2D:
   m_GameObject: {fileID: 1643069527592632}
   m_Enabled: 0
   serializedVersion: 4
-  m_EnableCollision: 0
+  m_EnableCollision: 1
   m_ConnectedRigidBody: {fileID: 0}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_DampingRatio: 0
