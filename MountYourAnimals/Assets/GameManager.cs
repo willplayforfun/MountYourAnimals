@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
         movePrompt.SetActive(false);
         roundPrompt.SetActive(false);
         abilityPrompt.SetActive(false);
+        skipPrompt.SetActive(false);
 #if UNITY_EDITOR
         debugControlsUI.SetActive(debugControlsStartShowing);
 #else
@@ -62,7 +63,7 @@ public class GameManager : MonoBehaviour
     {
         if (autoStart)
         {
-            StartPlay();
+            StartPlay(true);
         }
     }
     // ----------------
@@ -82,6 +83,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject endUI;
 
+    [SerializeField]
+    internal GameObject skipPrompt;
     [SerializeField]
     internal GameObject freezePrompt;
     [SerializeField]
@@ -136,12 +139,21 @@ public class GameManager : MonoBehaviour
     // ----------------
 
     // called by UI to start the game
-    public void StartPlay()
+    public void StartPlay(bool cinematic)
     {
         if (!isPlaying)
         {
-            // start the game with intro sequence
-            introRoutine = StartCoroutine(IntroSequence());
+            if (cinematic)
+            {
+                // start the game with intro sequence
+                introRoutine = StartCoroutine(IntroSequence());
+            }
+            else
+            {
+                humanInstance.GetComponentInChildren<Phone>().rotateBar = true;
+                humanInstance.GetComponentInChildren<Human>().cinematic = false;
+                AnimalSpawner.SpawnAnimal();
+            }
 
             waitingToStartRound = false;
             isPlaying = true;
@@ -155,6 +167,7 @@ public class GameManager : MonoBehaviour
     private Coroutine introRoutine;
     private IEnumerator IntroSequence()
     {
+        skipPrompt.SetActive(true);
         // TODO start dialogue
         yield return new WaitForSeconds(1);
         humanInstance.GetComponentInChildren<Phone>().AddSignal(true);
@@ -180,6 +193,7 @@ public class GameManager : MonoBehaviour
         AnimalSpawner.SpawnAnimal();
 
         introRoutine = null;
+        skipPrompt.SetActive(false);
     }
 
     // called by the actively controlled Animal when the player freezes it
@@ -309,6 +323,7 @@ public class GameManager : MonoBehaviour
                 humanInstance.GetComponentInChildren<Human>().cinematic = false;
                 AnimalSpawner.SpawnAnimal();
                 introRoutine = null;
+                skipPrompt.SetActive(false);
             }
         }
         // if (waitingToStartRound && Input.GetKeyDown(KeyCode.Return))

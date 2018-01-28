@@ -7,8 +7,8 @@ public class PatienceBar : MonoBehaviour {
 
     public float currentPatience { get; private set; }
     public float maxPatience = 100;
-    private float patienceLossMultiplier = 1;
-    private float patienceGainMultiplier = 3;
+    private float patienceLossMultiplier = 0.5f;
+    private float patienceGainMultiplier = 9;
 
     public bool inSignalRange = false;
     public bool inStopRange = false;
