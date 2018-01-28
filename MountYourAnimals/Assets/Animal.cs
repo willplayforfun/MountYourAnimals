@@ -73,7 +73,7 @@ public class Animal : MonoBehaviour
     }
     protected virtual void Freeze()
     {
-        if (latestHit != null || isFirstAnimal || touchingGround)
+        if (latestHit != null || touchingGround)
         {
             beingControlled = false;
 
