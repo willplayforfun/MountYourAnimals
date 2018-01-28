@@ -810,7 +810,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalAnimals:
   - {fileID: 114330928419145754, guid: 0e9713a962424c645b9def59f7aef1f2, type: 2}
-  - {fileID: 114896819924540342, guid: 3637fbb12feb23e46a31eda63ef5c859, type: 2}
+  - {fileID: 114896819924540342, guid: cf33a55e2c40da141a81589340a92a2c, type: 2}
   - {fileID: 114262249510668710, guid: 4c244e81e8bb2fd48943840a36a679b4, type: 2}
   - {fileID: 114922638341430784, guid: cd230fccc626a3641ace29fc34da7e1d, type: 2}
   exoticAnimals: []
@@ -1407,6 +1407,13 @@ MonoBehaviour:
   humanPrefab: {fileID: 1406344371607996, guid: 73ba090b9cf93834da0a3c034b1ce270,
     type: 2}
   humanSpawnPoint: {fileID: 0}
+  minHorizontal: 0
+  horizontalVarianceMinimum: -4
+  horizontalVarianceMaximum: 4
+  minVertical: 2
+  verticalVarianceMinimum: 1
+  verticalVarianceMaximum: 3
+  score: 0
 --- !u!114 &114898342304016318
 MonoBehaviour:
   m_ObjectHideFlags: 1
