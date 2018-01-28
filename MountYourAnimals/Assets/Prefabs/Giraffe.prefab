@@ -455,8 +455,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotateForce: 200
   maximumAngularVelocity: 180
-  spawnSounds: []
-  moveSounds: []
+  spawnSounds:
+  - {fileID: 8300000, guid: 07753e2c06406f84da34e21c4cef6015, type: 3}
+  moveSounds:
+  - {fileID: 8300000, guid: 07753e2c06406f84da34e21c4cef6015, type: 3}
+  - {fileID: 8300000, guid: 077e1dd67be3fb646a8e38b43386c2a9, type: 3}
+  - {fileID: 8300000, guid: b7971818f70416643b759f9a67891b5d, type: 3}
+  - {fileID: 8300000, guid: a525b6c57c44e9d43b509733e34c5055, type: 3}
+  - {fileID: 8300000, guid: ef5c461ef9ba19a4fa53bbfbe22eb0cc, type: 3}
+  - {fileID: 8300000, guid: 18d4b3d03d64d6142a939265e62dbbe2, type: 3}
+  - {fileID: 8300000, guid: 60316dfd01e910842a89dbce41f557c7, type: 3}
+  - {fileID: 8300000, guid: 7adf21baf82b00046b78dbc9c506ac32, type: 3}
+  - {fileID: 8300000, guid: 6f6368ae232ec3c4ab4cb1634e758be2, type: 3}
+  - {fileID: 8300000, guid: 9652446d9ca9c764195d5757b1f27d89, type: 3}
   freezeSounds: []
   uiSprite: {fileID: 21300000, guid: 70b40da2e743c314995ce362cf46f923, type: 3}
   gibs:
