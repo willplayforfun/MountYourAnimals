@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Animal : MonoBehaviour
@@ -42,6 +43,15 @@ public class Animal : MonoBehaviour
 
     private List<Animal> attachedAnimals = new List<Animal>();
 
+	public AudioMixer bMixer;
+	public AudioMixerSnapshot[] bMixerSnapshots;
+	public float[] bMixerWeights;
+
+	public AudioMixerSnapshot musicSnapshot;
+
+	static float backgroundAudioMinY = 10f;
+	static float backgroundAudioMaxY = 40f;
+
     void Awake ()
     {
         myRb = GetComponent<Rigidbody2D>();
@@ -53,6 +63,9 @@ public class Animal : MonoBehaviour
         //myPermanentJoint = this.gameObject.AddComponent<FixedJoint2D>();
         myPermanentJoint.enabled = false;
         myAudioSource = GetComponent<AudioSource>();
+
+		musicSnapshot.TransitionTo (0.7f);
+
     }
 
     private bool isFirstAnimal;
@@ -140,8 +153,17 @@ public class Animal : MonoBehaviour
 
 	protected virtual void Update ()
     {
+
         if (beingControlled)
         {
+
+			float spacePercent = (gameObject.transform.position.y - backgroundAudioMinY)
+				/ (backgroundAudioMaxY - backgroundAudioMinY);
+
+			bMixerWeights [0] = 1 - spacePercent;
+			bMixerWeights [1] = spacePercent;
+			bMixer.TransitionToSnapshots(bMixerSnapshots, bMixerWeights, 0f);
+
             // rotate based on key input
             myRb.AddTorque(-Input.GetAxis("Horizontal") * rotateForce);
 
