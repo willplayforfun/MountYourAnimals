@@ -9,6 +9,8 @@ public class Bird : Animal
     private float upForce;
     [SerializeField]
     private float horizontalForce;
+    [SerializeField]
+    private float maxSpeed = 5;
 
     protected override void DoAbility()
     {
@@ -31,6 +33,7 @@ public class Bird : Animal
         if(beingControlled)
         {
             myRb.AddForce(Vector2.right * Input.GetAxis("Horizontal") * horizontalForce, ForceMode2D.Force);
+            myRb.velocity = Vector3.ClampMagnitude(myRb.velocity, maxSpeed);
         }
     }
 

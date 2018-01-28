@@ -294,6 +294,7 @@ MonoBehaviour:
   maximumGibSpin: 10
   upForce: 40
   horizontalForce: 30
+  maxSpeed: 10
 --- !u!212 &212106435889221932
 SpriteRenderer:
   m_ObjectHideFlags: 1
