@@ -674,6 +674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalAnimals:
   - {fileID: 114330928419145754, guid: 0e9713a962424c645b9def59f7aef1f2, type: 2}
+  - {fileID: 114896819924540342, guid: 3637fbb12feb23e46a31eda63ef5c859, type: 2}
   exoticAnimals: []
   spawnPoints:
   - {fileID: 0}
