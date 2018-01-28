@@ -181,6 +181,11 @@ public class Animal : MonoBehaviour
             {
                 Freeze();
             }
+            else if(Input.GetKeyDown(KeyCode.Q))
+            {
+                latestHit = null;
+                myJoint.enabled = false;
+            }
         }
     }
 

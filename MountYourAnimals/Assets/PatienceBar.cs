@@ -11,22 +11,25 @@ public class PatienceBar : MonoBehaviour {
     private float patienceGainMultiplier = 3;
 
     public bool inSignalRange = false;
-    public bool inStopRange = false;
 
     [SerializeField]
     private Slider patienceBar;
 
     private int signalRef;
 
-	// Use this for initialization
-	void Start () {
-        currentPatience = maxPatience;
+	private void Start ()
+    {
+        ResetPatience();
 	}
-	
-	// Update is called once per frame
-	void Update () {
 
-        if (!inStopRange)
+    public void ResetPatience()
+    {
+        currentPatience = maxPatience;
+    }
+
+    private void Update ()
+    {
+        if (GameManager.Instance.isPlaying)
         {
             if (!inSignalRange)
             {
@@ -37,7 +40,6 @@ public class PatienceBar : MonoBehaviour {
                 currentPatience += Time.deltaTime * patienceGainMultiplier;
             }
         }
-
 
         patienceBar.value = currentPatience / 100;
 

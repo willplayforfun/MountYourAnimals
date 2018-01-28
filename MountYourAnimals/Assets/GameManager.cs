@@ -14,14 +14,30 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     internal AnimalSpawner AnimalSpawner { get; private set; }
 
-    GameObject signal;
+    List<float> scores = new List<float>();
+
     private void Awake()
     {
         Instance = this;
 
+        if (PlayerPrefs.HasKey("Scores"))
+        {
+            int numScores = PlayerPrefs.GetInt("Scores");
+            for (int i = 0; i < numScores; i++)
+            {
+                Debug.Log("Score " + i + ": " + PlayerPrefs.GetFloat("Score" + i));
+                scores.Add(PlayerPrefs.GetFloat("Score" + i));
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Scores", 0);
+        }
+
         // TODO intro sequence?
 
         startUI.SetActive(true);
+        endUI.SetActive(false);
         gameUI.SetActive(false);
         freezePrompt.SetActive(false);
         grabPrompt.SetActive(false);
@@ -38,8 +54,6 @@ public class GameManager : MonoBehaviour
 
         // create a human initially
         SpawnHuman();
-
-        signal = GameObject.Find("Signal1");
     }
     private void Start()
     {
@@ -51,11 +65,18 @@ public class GameManager : MonoBehaviour
     // ----------------
 
     [SerializeField]
+    private GameObject signal;
+
+    [Space(12)]
+
+    [SerializeField]
     private GameObject startUI;
     [SerializeField]
     private GameObject debugControlsUI;
     [SerializeField]
     private GameObject gameUI;
+    [SerializeField]
+    private GameObject endUI;
 
     [SerializeField]
     internal GameObject freezePrompt;
@@ -71,6 +92,10 @@ public class GameManager : MonoBehaviour
     internal NextUpPanel nextAnimalPanel;
     [SerializeField]
     internal PatienceBar patienceRef;
+    [SerializeField]
+    private UnityEngine.UI.Text yourScore;
+    [SerializeField]
+    private UnityEngine.UI.Text relativeScore;
 
     // --- HUMAN STUFF ---
     [Space(12)]
@@ -102,19 +127,35 @@ public class GameManager : MonoBehaviour
     // true if we are waiting for player input to start the next round
     internal bool waitingToStartRound { get; private set; }
 
+    internal float score;
+
     // ----------------
 
     // called by UI to start the game
     public void StartPlay()
     {
-        // TODO start the game
-        // load in initial animal, start dialogue, etc.
-        AnimalSpawner.SpawnAnimal();
+        if (!isPlaying)
+        {
+            // start the game with intro sequence
+            StartCoroutine(IntroSequence());
 
-        isPlaying = true;
-        startUI.SetActive(false);
-        gameUI.SetActive(true);
-        // TODO fade out UI instead of immediately hiding, animate in game UI
+            waitingToStartRound = false;
+            isPlaying = true;
+            startUI.SetActive(false);
+            gameUI.SetActive(true);
+            endUI.SetActive(false);
+            // TODO fade out UI instead of immediately hiding, animate in game UI
+        }
+    }
+
+    private IEnumerator IntroSequence()
+    {
+        // TODO start dialogue
+
+        yield return null;
+
+        // load in initial animal
+        AnimalSpawner.SpawnAnimal();
     }
 
     // called by the actively controlled Animal when the player freezes it
@@ -147,20 +188,60 @@ public class GameManager : MonoBehaviour
     // called when patience reaches zero, ending the game
     public void GameOver()
     {
-        // TODO reset the game
-        // i.e. reset flags, reset score, music, etc.
+        if (isPlaying)
+        {
+            // TODO reset the game
+            // i.e. reset flags, reset score, music, etc.
 
-        roundNumber = 0;
-        // delete human and create a new one
-        SpawnHuman();
-        // delete animals
-        AnimalSpawner.ClearAllAnimals();
+            // reset patience level
+            patienceRef.ResetPatience();
+            score = 0;
+            roundNumber = 0;
+            // delete human and create a new one
+            SpawnHuman();
+            // delete animals
+            AnimalSpawner.ClearAllAnimals();
 
 
-        isPlaying = false;
+            isPlaying = false;
+            startUI.SetActive(false);
+            gameUI.SetActive(false);
+            endUI.SetActive(true);
+            // TODO some sort of transition
+
+
+            //END
+            int numLess = 0;
+            for (int i = 0; i < scores.Count; i++)
+            {
+                if(scores[i] < score)
+                {
+                    numLess++;
+                }
+            }
+            yourScore.text = "Carl didn't get the job,";
+            if (scores.Count == 0)
+            {
+                relativeScore.text = "and he was the only candidate.";
+            }
+            else
+            {
+                relativeScore.text = "but he stayed on the phone longer than " + numLess / scores.Count + "% of candidates.";
+            }
+
+            //add score
+            PlayerPrefs.SetFloat("Score" + scores.Count, score);
+            scores.Add(score);
+            PlayerPrefs.SetInt("Scores", scores.Count);
+        }
+    }
+
+    public void ReturnToMainMenu()
+    {
         startUI.SetActive(true);
         gameUI.SetActive(false);
-        // TODO some sort of transition and game over screen
+        endUI.SetActive(false);
+        // TODO some sort of transition
     }
 
     // called by UI to quit the application
@@ -180,9 +261,13 @@ public class GameManager : MonoBehaviour
         {
             GameOver();
         }
+        if(Input.GetKeyDown(KeyCode.F12))
+        {
+            ResetHighScores();
+        }
 
         // next round control
-        if (waitingToStartRound && Input.GetKeyDown(KeyCode.Space))
+        if (waitingToStartRound && Input.GetKeyDown(KeyCode.Return))
         {
             StartNextRound();
         }
@@ -194,8 +279,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public float minHorizontal, horizontalVarianceMinimum, horizontalVarianceMaximum, minVertical, verticalVarianceMinimum, verticalVarianceMaximum;
-    void ChangeSignalLocation()
+    [Space(12)]
+
+    [SerializeField]
+    private float minHorizontal;
+    [SerializeField]
+    private float horizontalVarianceMinimum;
+    [SerializeField]
+    private float horizontalVarianceMaximum;
+    [SerializeField]
+    private float minVertical;
+    [SerializeField]
+    private float verticalVarianceMinimum;
+    [SerializeField]
+    private float verticalVarianceMaximum;
+
+    private void ChangeSignalLocation()
     {
         float horizontalVariance = Random.Range(horizontalVarianceMinimum,horizontalVarianceMaximum);
         float verticalVariance = Random.Range(verticalVarianceMinimum,verticalVarianceMaximum);        
@@ -206,6 +305,9 @@ public class GameManager : MonoBehaviour
             signal.transform.position = new Vector3(-5f, signal.transform.position.y, 0);
     }
 
-    [SerializeField]
-    internal float score;
+
+    private void ResetHighScores()
+    {
+
+    }
 }

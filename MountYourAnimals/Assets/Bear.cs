@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Bear : Animal
 {
+    public override void Spawn(bool first)
+    {
+        base.Spawn(first);
+
+        GameManager.Instance.abilityPrompt.SetActive(false);
+    }
+
     protected override void DoAbility()
     {
         base.DoAbility();
