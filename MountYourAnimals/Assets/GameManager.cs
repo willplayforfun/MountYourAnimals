@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class GameManager : MonoBehaviour
 {
@@ -103,6 +104,10 @@ public class GameManager : MonoBehaviour
     private UnityEngine.UI.Text yourScore;
     [SerializeField]
     private UnityEngine.UI.Text relativeScore;
+	[SerializeField]
+	public GameObject backgroundMusic;
+	[SerializeField]
+	public AudioMixerSnapshot forestAudioSnapshot;
 
     // --- HUMAN STUFF ---
     [Space(12)]
@@ -191,6 +196,7 @@ public class GameManager : MonoBehaviour
 
         // load in initial animal
         AnimalSpawner.SpawnAnimal();
+		backgroundMusic.SetActive (true);
 
         introRoutine = null;
         skipPrompt.SetActive(false);
@@ -231,6 +237,10 @@ public class GameManager : MonoBehaviour
     {
         if (isPlaying)
         {
+
+			backgroundMusic.SetActive (false);
+			forestAudioSnapshot.TransitionTo (1f);
+
             // TODO reset the game
             // i.e. reset flags, reset score, music, etc.
 
@@ -328,6 +338,7 @@ public class GameManager : MonoBehaviour
                 AnimalSpawner.SpawnAnimal();
                 introRoutine = null;
                 skipPrompt.SetActive(false);
+				backgroundMusic.SetActive (true);
             }
         }
         // if (waitingToStartRound && Input.GetKeyDown(KeyCode.Return))

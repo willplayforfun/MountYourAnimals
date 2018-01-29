@@ -269,6 +269,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21cd9c5fbb48b8543af3a194dcce0c22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bMixer: {fileID: 24100000, guid: 7405c5fc95ff845e8b5a85d1bba3c5f9, type: 2}
+  bMixerSnapshots:
+  - {fileID: 24500006, guid: 7405c5fc95ff845e8b5a85d1bba3c5f9, type: 2}
+  - {fileID: 245519191744643048, guid: 7405c5fc95ff845e8b5a85d1bba3c5f9, type: 2}
+  bMixerWeights:
+  - 1
+  - 0
+  backgroundAudioMinY: 10
+  backgroundAudioMaxY: 40
+  musicSnapshot: {fileID: 245407505489062794, guid: 3c96b37819c2148b9a9f142ed1fb04cb,
+    type: 2}
   rotateForce: 100
   maximumAngularVelocity: 90
   spawnSounds:
