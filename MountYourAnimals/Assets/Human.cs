@@ -100,12 +100,18 @@ public class Human : MonoBehaviour
                 }
         }
     }
+    [SerializeField]
+    private AudioSource source;
+    [SerializeField]
+    private AudioClip[] speechSounds;
+
     public void ShowTextBubble(string line)
     {
         if(routine != null)
         {
             StopCoroutine(routine);
         }
+        source.PlayOneShot(speechSounds[Random.Range(0, speechSounds.Length)]);
         routine = StartCoroutine(TextBubbleRoutine(line));
     }
     private Coroutine routine;
