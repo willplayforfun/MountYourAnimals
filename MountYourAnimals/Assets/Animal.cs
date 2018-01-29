@@ -64,6 +64,7 @@ public class Animal : MonoBehaviour
         //myPermanentJoint = this.gameObject.AddComponent<FixedJoint2D>();
         myPermanentJoint.enabled = false;
         myAudioSource = GetComponent<AudioSource>();
+        if(musicSnapshot != null)
 		musicSnapshot.TransitionTo (0.7f);
     }
 

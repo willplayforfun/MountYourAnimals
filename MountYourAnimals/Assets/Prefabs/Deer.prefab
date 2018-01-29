@@ -420,6 +420,7 @@ MonoBehaviour:
   uiSprite: {fileID: 21300000, guid: b2b72d2a3f8e1774c8a014d4f520d6c6, type: 3}
   gibs:
   - {fileID: 1562133340029346, guid: c2450bcbc157d754e87abdc5aec00f47, type: 2}
+  - {fileID: 1562133340029346, guid: ff8b942e85af3c64f9002a561a8ced6a, type: 2}
   numberOfGibs: 10
   explodeForce: 10
   maximumGibSpin: 10

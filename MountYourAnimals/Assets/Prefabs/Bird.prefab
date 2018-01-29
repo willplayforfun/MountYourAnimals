@@ -299,7 +299,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2f8432f636d1e3544881155aa68b22cd, type: 3}
   uiSprite: {fileID: 21300000, guid: 2147f00152db5664193d7e66f560a440, type: 3}
   gibs:
-  - {fileID: 1562133340029346, guid: c2450bcbc157d754e87abdc5aec00f47, type: 2}
+  - {fileID: 1562133340029346, guid: af48d3cee42f74840819b645b73a6b98, type: 2}
   numberOfGibs: 10
   explodeForce: 10
   maximumGibSpin: 10
