@@ -480,6 +480,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9652446d9ca9c764195d5757b1f27d89, type: 3}
   freezeSounds: []
   uiSprite: {fileID: 21300000, guid: 70b40da2e743c314995ce362cf46f923, type: 3}
+  abilityName: Extend
   gibs:
   - {fileID: 1562133340029346, guid: c2450bcbc157d754e87abdc5aec00f47, type: 2}
   numberOfGibs: 10

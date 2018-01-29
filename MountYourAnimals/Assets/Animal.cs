@@ -39,6 +39,8 @@ public class Animal : MonoBehaviour
     [Space(12)]
 
     public Sprite uiSprite;
+    [SerializeField]
+    protected string abilityName;
 
     [Space(12)]
 
@@ -84,8 +86,9 @@ public class Animal : MonoBehaviour
 
         movePromptCoroutine = StartCoroutine(MovePromptRoutine());
         GameManager.Instance.abilityPrompt.SetActive(true);
+        GameManager.Instance.abilityName.text = "Ability: " + abilityName;
 
-        if(isFirstAnimal)
+        if (isFirstAnimal)
         {
             GameManager.Instance.freezePrompt.SetActive(true);
         }

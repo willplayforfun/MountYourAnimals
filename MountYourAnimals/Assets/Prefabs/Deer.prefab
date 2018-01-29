@@ -418,6 +418,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 134724c28a507554c9cdf20aabb8333c, type: 3}
   freezeSounds: []
   uiSprite: {fileID: 21300000, guid: b2b72d2a3f8e1774c8a014d4f520d6c6, type: 3}
+  abilityName: Detach
   gibs:
   - {fileID: 1562133340029346, guid: c2450bcbc157d754e87abdc5aec00f47, type: 2}
   - {fileID: 1562133340029346, guid: ff8b942e85af3c64f9002a561a8ced6a, type: 2}

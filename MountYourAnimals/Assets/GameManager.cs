@@ -97,6 +97,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     internal GameObject abilityPrompt;
     [SerializeField]
+    internal UnityEngine.UI.Text abilityName;
+    [SerializeField]
     internal NextUpPanel nextAnimalPanel;
     [SerializeField]
     internal PatienceBar patienceRef;

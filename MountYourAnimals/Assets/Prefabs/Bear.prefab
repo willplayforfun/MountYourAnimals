@@ -381,6 +381,7 @@ MonoBehaviour:
   freezeSounds:
   - {fileID: 8300000, guid: cd1a01cb0ef10ad418c075b7c7773fbc, type: 3}
   uiSprite: {fileID: 21300000, guid: 56c83ee53bb22ee4384227224c549c9b, type: 3}
+  abilityName: Bite
   gibs:
   - {fileID: 1562133340029346, guid: c2450bcbc157d754e87abdc5aec00f47, type: 2}
   - {fileID: 1562133340029346, guid: ff8b942e85af3c64f9002a561a8ced6a, type: 2}
