@@ -2244,8 +2244,8 @@ MonoBehaviour:
     type: 2}
   humanSpawnPoint: {fileID: 0}
   minHorizontal: 0
-  horizontalVarianceMinimum: -4
-  horizontalVarianceMaximum: 4
+  horizontalVarianceMinimum: -3
+  horizontalVarianceMaximum: 3
   minVertical: 0.5
   verticalVarianceMinimum: 0.5
   verticalVarianceMaximum: 2
