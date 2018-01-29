@@ -2399,10 +2399,36 @@ MonoBehaviour:
   phone: {fileID: 4784533700038322}
   torso: {fileID: 4356545410837826}
   angryLines:
-  - Angry Line!
+  - You seem to keep cutting out...
+  - "If you don\u2019t want this position, you can just say it."
+  - This is unbelievable!
+  - I do say, your generation has no responsibility.
+  - Perhaps I should look elsewhere...
   mehLines: []
   goodLines:
-  - Good Line!
+  - You seem like an admirable candidate.
+  - "I think you\u2019ve proven yourself to fit the bill."
+  - You remind me of myself sometimes.
+  - Some who is strong, empowered.
+  - "You\u2019re the kind of bloke we could use for our company!"
+  - "We\u2019ll double your current salary."
+  - We could even get you a swivel chair!
+  - "You name it, it\u2019s yours."
+  - Did I ever tell you about my daughter Maggie?
+  - Maggie dreams of becoming a successful businesswoman.
+  - "I want you to be Maggie\u2019s role model."
+  source: {fileID: 0}
+  speechSounds:
+  - {fileID: 8300000, guid: fe1364ae55986f14cadfb0a1dece9433, type: 3}
+  - {fileID: 8300000, guid: 24aca21aefa75b440b8bf810e6a898b4, type: 3}
+  - {fileID: 8300000, guid: 46a303eecbe7a1f4b97911ee8dbc94a1, type: 3}
+  - {fileID: 8300000, guid: deec997c8ab1557479d616b47b3872db, type: 3}
+  - {fileID: 8300000, guid: e1791fff6c56fac4ea1d4ecfacf2ae5c, type: 3}
+  - {fileID: 8300000, guid: 6eff61017b524624d9098801f7c615be, type: 3}
+  - {fileID: 8300000, guid: 20d464241e5bb89458aa5cae86fbde7a, type: 3}
+  - {fileID: 8300000, guid: 6c6442d7f37d303408c07e0ed5d53ec7, type: 3}
+  - {fileID: 8300000, guid: c2308bdae6b88e04b94ac574a3b8f28a, type: 3}
+  - {fileID: 8300000, guid: a6e258265f51bf146a4d0a4a84c7b99a, type: 3}
 --- !u!114 &114906500073797456
 MonoBehaviour:
   m_ObjectHideFlags: 1
