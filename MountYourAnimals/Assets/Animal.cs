@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Animal : MonoBehaviour
@@ -9,6 +10,16 @@ public class Animal : MonoBehaviour
     protected HingeJoint2D myJoint;
     private FixedJoint2D myPermanentJoint;
     private FixedJoint2D myHumanJoint;
+
+	public AudioMixer bMixer;
+	public AudioMixerSnapshot[] bMixerSnapshots;
+	public float[] bMixerWeights;
+
+	public float backgroundAudioMinY;
+	public float backgroundAudioMaxY;
+
+	public AudioMixerSnapshot musicSnapshot;
+
 
     [SerializeField]
     private float rotateForce = 10;
@@ -53,6 +64,7 @@ public class Animal : MonoBehaviour
         //myPermanentJoint = this.gameObject.AddComponent<FixedJoint2D>();
         myPermanentJoint.enabled = false;
         myAudioSource = GetComponent<AudioSource>();
+		musicSnapshot.TransitionTo (0.7f);
     }
 
     private bool isFirstAnimal;
@@ -142,6 +154,14 @@ public class Animal : MonoBehaviour
     {
         if (beingControlled)
         {
+
+			float spacePercent = (gameObject.transform.position.y - backgroundAudioMinY)
+				/ (backgroundAudioMaxY - backgroundAudioMinY);
+
+			bMixerWeights [0] = 1 - spacePercent;
+			bMixerWeights [1] = spacePercent;
+			bMixer.TransitionToSnapshots(bMixerSnapshots, bMixerWeights, 0f);
+
             // rotate based on key input
             myRb.AddTorque(-Input.GetAxis("Horizontal") * rotateForce);
 

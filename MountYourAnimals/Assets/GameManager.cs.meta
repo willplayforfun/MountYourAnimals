@@ -1,11 +1,31 @@
 fileFormatVersion: 2
 guid: 908c2edb1369da1458eedd968b5fb894
-timeCreated: 1517079410
+timeCreated: 1517184208
 licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - signal: {instanceID: 0}
+  - startUI: {instanceID: 0}
+  - debugControlsUI: {instanceID: 0}
+  - gameUI: {instanceID: 0}
+  - endUI: {instanceID: 0}
+  - skipPrompt: {instanceID: 0}
+  - freezePrompt: {instanceID: 0}
+  - grabPrompt: {instanceID: 0}
+  - movePrompt: {instanceID: 0}
+  - roundPrompt: {instanceID: 0}
+  - abilityPrompt: {instanceID: 0}
+  - nextAnimalPanel: {instanceID: 0}
+  - patienceRef: {instanceID: 0}
+  - yourScore: {instanceID: 0}
+  - relativeScore: {instanceID: 0}
+  - backgroundMusic: {instanceID: 0}
+  - forestAudioSnapshot: {fileID: 24500006, guid: 7405c5fc95ff845e8b5a85d1bba3c5f9,
+      type: 2}
+  - humanPrefab: {instanceID: 0}
+  - humanSpawnPoint: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
