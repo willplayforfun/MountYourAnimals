@@ -181,9 +181,9 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         humanInstance.GetComponentInChildren<Phone>().AddSignal(true);
         yield return new WaitForSeconds(0.5f);
-        humanInstance.GetComponent<Human>().ShowTextBubble("Intro dialogue!");
+        humanInstance.GetComponent<Human>().ShowTextBubble("I see you're applying for a job...");
         yield return new WaitForSeconds(5);
-        humanInstance.GetComponent<Human>().ShowTextBubble("Intro dialogue 2!");
+        humanInstance.GetComponent<Human>().ShowTextBubble("Hello? Are you there?");
         yield return new WaitForSeconds(5);
         humanInstance.GetComponentInChildren<Phone>().SubtractSignal(true);
         yield return new WaitForSeconds(1f);
