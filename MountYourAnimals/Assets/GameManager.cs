@@ -208,7 +208,7 @@ public class GameManager : MonoBehaviour
         humanInstance.GetComponent<Human>().EnableCameraFocus();
 
         //Combined Freeze + Next round button press into one 
-        StartNextRound();
+        //StartNextRound();
     }
 
     // called in GameManager's Update() function when the player presses space

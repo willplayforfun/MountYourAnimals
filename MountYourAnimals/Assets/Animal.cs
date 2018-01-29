@@ -384,7 +384,8 @@ public class Animal : MonoBehaviour
         Debug.Log("clicked on " + this.gameObject.name);
         if(allowMouseActivation)
         {
-            DoAbility();
+            Explode();
+            //DoAbility();
         }
     }
 
