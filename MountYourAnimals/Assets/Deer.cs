@@ -8,18 +8,25 @@ public class Deer : Animal
     [SerializeField]
     private GameObject antlers;
 
+    private bool didAbility;
+
     protected override void DoAbility()
     {
         base.DoAbility();
 
-        antlers.AddComponent<Rigidbody2D>();
-        antlers.transform.SetParent(this.transform.parent);
-        if (antlerJoint != null)
+        if(!didAbility)
         {
-            antlerJoint.enabled = false;
+            didAbility = true;
 
-            FixedJoint2D joint = antlers.AddComponent<FixedJoint2D>();
-            joint.connectedBody = antlerJoint.connectedBody;
+            antlers.AddComponent<Rigidbody2D>();
+            antlers.transform.SetParent(this.transform.parent);
+            if (antlerJoint != null)
+            {
+                antlerJoint.enabled = false;
+
+                FixedJoint2D joint = antlers.AddComponent<FixedJoint2D>();
+                joint.connectedBody = antlerJoint.connectedBody;
+            }
         }
     }
 
@@ -35,6 +42,12 @@ public class Deer : Animal
             antlersStuck = true;
             antlerJoint = this.gameObject.AddComponent<FixedJoint2D>();
             antlerJoint.connectedBody = collision.collider.GetComponentInParent<Rigidbody2D>();
+        }
+
+        if(latestHit == antlers && didAbility)
+        {
+            latestHit = null;
+            myJoint.enabled = false;
         }
     }
 }

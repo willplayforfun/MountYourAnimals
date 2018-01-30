@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 50213184341246692}
   - component: {fileID: 114262249510668710}
   - component: {fileID: 233210802959195390}
-  - component: {fileID: 114569901186707546}
   - component: {fileID: 82471527326759484}
   - component: {fileID: 255880187066177326}
+  - component: {fileID: 114797188708521582}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Untagged
@@ -259,6 +259,7 @@ MonoBehaviour:
   freezeSounds:
   - {fileID: 8300000, guid: 1fa2d8df30bad2d409d6054390fbed92, type: 3}
   uiSprite: {fileID: 21300000, guid: bb0b52c9562fe2d498d1eda6b9f2e994, type: 3}
+  abilityName: 
   gibs:
   - {fileID: 1562133340029346, guid: c2450bcbc157d754e87abdc5aec00f47, type: 2}
   numberOfGibs: 10
@@ -297,7 +298,7 @@ MonoBehaviour:
   lastFlipX: 0
   lastFlipY: 0
   editorCache: []
---- !u!114 &114569901186707546
+--- !u!114 &114797188708521582
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -305,13 +306,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1566625325039508}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5ef66453f88bfc45919e47b06ff9f19, type: 3}
+  m_Script: {fileID: 11500000, guid: 807f8d2bf0831224f8b2f509fa2f073f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Influence: {x: 1, y: 1}
   m_DrawDebug: 0
   m_Offset: {x: 0, y: 0}
-  m_VelocityToOffset: {x: 0.6, y: 0.1}
 --- !u!212 &212581960962640492
 SpriteRenderer:
   m_ObjectHideFlags: 1

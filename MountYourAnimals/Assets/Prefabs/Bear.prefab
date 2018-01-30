@@ -22,10 +22,10 @@ GameObject:
   - component: {fileID: 50999446427483606}
   - component: {fileID: 114330928419145754}
   - component: {fileID: 233288575100180346}
-  - component: {fileID: 114321713113161062}
   - component: {fileID: 82371075632913014}
   - component: {fileID: 231794801180577560}
   - component: {fileID: 255220369592695184}
+  - component: {fileID: 114592100065934126}
   m_Layer: 0
   m_Name: Bear
   m_TagString: Untagged
@@ -326,21 +326,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114321713113161062
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1603511003763020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5ef66453f88bfc45919e47b06ff9f19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Influence: {x: 1, y: 1}
-  m_DrawDebug: 0
-  m_Offset: {x: 0, y: 0}
-  m_VelocityToOffset: {x: 0.6, y: 0.1}
 --- !u!114 &114330928419145754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -434,6 +419,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   biteIndicator: {fileID: 1962554435168974}
+--- !u!114 &114592100065934126
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1603511003763020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 807f8d2bf0831224f8b2f509fa2f073f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Influence: {x: 1, y: 1}
+  m_DrawDebug: 0
+  m_Offset: {x: 0, y: 0}
 --- !u!212 &212141248346062120
 SpriteRenderer:
   m_ObjectHideFlags: 1

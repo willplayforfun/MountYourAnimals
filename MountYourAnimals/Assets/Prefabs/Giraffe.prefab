@@ -91,9 +91,9 @@ GameObject:
   - component: {fileID: 50352995995290546}
   - component: {fileID: 114418061222664478}
   - component: {fileID: 233267183283871854}
-  - component: {fileID: 114239646766706802}
   - component: {fileID: 82736312411573246}
   - component: {fileID: 255311055673305498}
+  - component: {fileID: 114008945653718374}
   m_Layer: 0
   m_Name: Giraffe
   m_TagString: Untagged
@@ -427,7 +427,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114239646766706802
+--- !u!114 &114008945653718374
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -435,13 +435,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1701957570585954}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5ef66453f88bfc45919e47b06ff9f19, type: 3}
+  m_Script: {fileID: 11500000, guid: 807f8d2bf0831224f8b2f509fa2f073f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Influence: {x: 1, y: 1}
   m_DrawDebug: 0
   m_Offset: {x: 0, y: 0}
-  m_VelocityToOffset: {x: 0.6, y: 0.1}
 --- !u!114 &114418061222664478
 MonoBehaviour:
   m_ObjectHideFlags: 1

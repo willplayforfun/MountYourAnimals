@@ -40,9 +40,9 @@ GameObject:
   - component: {fileID: 50211008553881756}
   - component: {fileID: 114922638341430784}
   - component: {fileID: 233702612671932722}
-  - component: {fileID: 114727635962819586}
   - component: {fileID: 82767566671629106}
   - component: {fileID: 255433249937892080}
+  - component: {fileID: 114649896992266916}
   m_Layer: 0
   m_Name: Bird
   m_TagString: Untagged
@@ -243,7 +243,7 @@ MonoBehaviour:
   lastFlipX: 0
   lastFlipY: 0
   editorCache: []
---- !u!114 &114727635962819586
+--- !u!114 &114649896992266916
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -251,13 +251,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1881968090735464}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5ef66453f88bfc45919e47b06ff9f19, type: 3}
+  m_Script: {fileID: 11500000, guid: 807f8d2bf0831224f8b2f509fa2f073f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Influence: {x: 1, y: 1}
   m_DrawDebug: 0
   m_Offset: {x: 0, y: 0}
-  m_VelocityToOffset: {x: 0.6, y: 0.1}
 --- !u!114 &114922638341430784
 MonoBehaviour:
   m_ObjectHideFlags: 1

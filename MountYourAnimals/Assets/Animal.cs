@@ -88,6 +88,8 @@ public class Animal : MonoBehaviour
         GameManager.Instance.abilityPrompt.SetActive(true);
         GameManager.Instance.abilityName.text = "Ability: " + abilityName;
 
+        GameManager.Instance.unstickPrompt.SetActive(false);
+
         if (isFirstAnimal)
         {
             GameManager.Instance.freezePrompt.SetActive(true);
@@ -137,6 +139,12 @@ public class Animal : MonoBehaviour
 
             PlayFreezeSound();
 
+
+            if (unstickPromptCoroutine != null)
+            {
+                StopCoroutine(unstickPromptCoroutine);
+            }
+            GameManager.Instance.unstickPrompt.SetActive(false);
             if (movePromptCoroutine != null)
             {
                 StopCoroutine(movePromptCoroutine);
@@ -209,6 +217,12 @@ public class Animal : MonoBehaviour
             {
                 latestHit = null;
                 myJoint.enabled = false;
+
+                if (unstickPromptCoroutine != null)
+                {
+                    StopCoroutine(unstickPromptCoroutine);
+                }
+                GameManager.Instance.unstickPrompt.SetActive(false);
             }
         }
     }
@@ -230,6 +244,15 @@ public class Animal : MonoBehaviour
             {
                 if (collision.contacts.Length > 0)
                 {
+                    if(collision.collider.gameObject != latestHit)
+                    {
+                        GameManager.Instance.unstickPrompt.SetActive(false);
+                        if(unstickPromptCoroutine != null)
+                        {
+                            StopCoroutine(unstickPromptCoroutine);
+                        }
+                        unstickPromptCoroutine = StartCoroutine(UnstickPromptRoutine());
+                    }
                     latestHit = collision.collider.gameObject;
 
                     PlayMovementSound();
@@ -438,5 +461,13 @@ public class Animal : MonoBehaviour
     private void DetachFromAnimal()
     {
         myPermanentJoint.enabled = false;
+    }
+
+    private Coroutine unstickPromptCoroutine;
+    private IEnumerator UnstickPromptRoutine()
+    {
+        yield return new WaitForSeconds(5);
+        GameManager.Instance.unstickPrompt.SetActive(true);
+        unstickPromptCoroutine = null;
     }
 }

@@ -6,6 +6,10 @@ public class Human : MonoBehaviour
 {
     [SerializeField]
     private Transform speechPivot;
+    [SerializeField]
+    private Transform tooltipPivot;
+    [SerializeField]
+    private GameObject arrow;
     //[SerializeField]
     //private 
     [SerializeField]
@@ -23,6 +27,8 @@ public class Human : MonoBehaviour
     {
         parts = GetComponentsInChildren<HumanPart>();
         //speechPivotX = s
+
+        ShowTooltip(false);
 
         speechPivot.gameObject.SetActive(false);
     }
@@ -67,6 +73,7 @@ public class Human : MonoBehaviour
             // flip to be on left
         }
         speechPivot.position = phone.position;
+        tooltipPivot.position = phone.position;
     }
 
     [SerializeField]
@@ -126,5 +133,11 @@ public class Human : MonoBehaviour
         speechPivot.gameObject.SetActive(false);
 
         routine = null;
+    }
+
+    public void ShowTooltip(bool on)
+    {
+        arrow.SetActive(on);
+        tooltipPivot.gameObject.SetActive(on);
     }
 }

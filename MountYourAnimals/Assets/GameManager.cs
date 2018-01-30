@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
         roundPrompt.SetActive(false);
         abilityPrompt.SetActive(false);
         skipPrompt.SetActive(false);
+        unstickPrompt.SetActive(false);
 #if UNITY_EDITOR
         debugControlsUI.SetActive(debugControlsStartShowing);
 #else
@@ -95,6 +96,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     internal GameObject roundPrompt;
     [SerializeField]
+    internal GameObject unstickPrompt;
+    [SerializeField]
     internal GameObject abilityPrompt;
     [SerializeField]
     internal UnityEngine.UI.Text abilityName;
@@ -142,6 +145,7 @@ public class GameManager : MonoBehaviour
     internal bool waitingToStartRound { get; private set; }
 
     internal float score;
+    private float startTime;
 
     // ----------------
 
@@ -196,12 +200,23 @@ public class GameManager : MonoBehaviour
         humanInstance.GetComponentInChildren<Phone>().rotateBar = true;
         humanInstance.GetComponentInChildren<Human>().cinematic = false;
 
+        humanInstance.GetComponentInChildren<Human>().ShowTooltip(true);
+        StartCoroutine(TurnOffTooltip());
+
         // load in initial animal
         AnimalSpawner.SpawnAnimal();
 		backgroundMusic.SetActive (true);
 
         introRoutine = null;
         skipPrompt.SetActive(false);
+
+        startTime = Time.time;
+    }
+    private IEnumerator TurnOffTooltip()
+    {
+        yield return new WaitForSeconds(5);
+
+        humanInstance.GetComponentInChildren<Human>().ShowTooltip(false);
     }
 
     // called by the actively controlled Animal when the player freezes it
@@ -246,10 +261,10 @@ public class GameManager : MonoBehaviour
             // TODO reset the game
             // i.e. reset flags, reset score, music, etc.
 
+            score = 0;
             lastSignalChange = 0;
             // reset patience level
             patienceRef.ResetPatience();
-            score = 0;
             roundNumber = 0;
             // delete human and create a new one
             SpawnHuman();
@@ -265,28 +280,30 @@ public class GameManager : MonoBehaviour
 
 
             //END
+            float totalTime = Time.time - startTime;
             int numLess = 0;
             for (int i = 0; i < scores.Count; i++)
             {
-                if(scores[i] < score)
+                if(scores[i] < totalTime)
                 {
                     numLess++;
                 }
             }
-            yourScore.text = Mathf.RoundToInt(score) + " seconds";
+            yourScore.text = "(" + Mathf.RoundToInt(totalTime) + " seconds)";
             if (scores.Count == 0)
             {
                 relativeScore.text = "and he was the only candidate.";
             }
             else
             {
-                relativeScore.text = "but he stayed on the phone longer than " + numLess / scores.Count + "% of candidates.";
+                relativeScore.text = "but he stayed on the phone longer than " + Mathf.RoundToInt(100 * numLess / scores.Count) + "% of candidates.";
             }
 
             //add score
-            PlayerPrefs.SetFloat("Score" + scores.Count, score);
-            scores.Add(score);
+            PlayerPrefs.SetFloat("Score" + scores.Count, totalTime);
+            scores.Add(totalTime);
             PlayerPrefs.SetInt("Scores", scores.Count);
+
         }
     }
 
@@ -341,6 +358,9 @@ public class GameManager : MonoBehaviour
                 introRoutine = null;
                 skipPrompt.SetActive(false);
 				backgroundMusic.SetActive (true);
+                humanInstance.GetComponentInChildren<Human>().ShowTooltip(true);
+                StartCoroutine(TurnOffTooltip());
+                startTime = Time.time;
             }
         }
         // if (waitingToStartRound && Input.GetKeyDown(KeyCode.Return))
@@ -348,12 +368,15 @@ public class GameManager : MonoBehaviour
         //     StartNextRound();
         // }
 
-        if(score - lastSignalChange >= 3)
+        if(score - lastSignalChange >= signalChangeFrequency)
         {
             lastSignalChange = score;
             ChangeSignalLocation();
         }
     }
+
+    [SerializeField]
+    private float signalChangeFrequency;
 
     [Space(12)]
 

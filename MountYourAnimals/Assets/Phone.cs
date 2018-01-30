@@ -34,7 +34,7 @@ public class Phone : MonoBehaviour
         if (signalIndicatorPivot != null)
         {
             signalIndicatorPivot.transform.position = transform.position;
-            if (signalBar >= 3 || !rotateBar)
+            if (signalBar == 3 || !rotateBar)
             {
                 signalIndicatorPivot.transform.LookAt(signalIndicatorPivot.transform.position + Vector3.up, Vector3.forward);
             }
@@ -44,13 +44,13 @@ public class Phone : MonoBehaviour
             }
         }
 
+		if(signalBar == 2)
+		{
+			GameManager.Instance.score += Time.deltaTime;
+		}
 		if(signalBar == 3)
 		{
-			GameManager.Instance.score += 1*Time.deltaTime;
-		}
-		if(signalBar == 4)
-		{
-			GameManager.Instance.score += 1*Time.deltaTime;
+			GameManager.Instance.score += Time.deltaTime;
 		}
 	}
 
@@ -62,7 +62,7 @@ public class Phone : MonoBehaviour
         if (signalBar > 3) signalBar = 3;
 		signalRenderer.sprite = signalSprites[signalBar];
 		// print(signalBar);
-        if (signalBar >= 3)
+        if (signalBar == 3)
         {
             GameManager.Instance.patienceRef.inSignalRange = true;
             GameManager.Instance.patienceRef.inStopRange = false;
@@ -85,13 +85,13 @@ public class Phone : MonoBehaviour
         if (signalBar < 0) signalBar = 0;
 		signalRenderer.sprite = signalSprites[signalBar];
 		// print(signalBar);
-        if (signalBar < 3)
+        if (signalBar == 2)
         {
             GameManager.Instance.patienceRef.inSignalRange = false;
             GameManager.Instance.patienceRef.inStopRange = true;
 
         }
-        if(signalBar < 2)
+        if(signalBar == 1)
         {
             GameManager.Instance.patienceRef.inStopRange = false;
         }
